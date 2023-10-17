@@ -1,10 +1,9 @@
-package com.esprit.kaddem.RestControllers;
+package com.esprit.kaddem.restcontrollers;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.esprit.kaddem.restcontrollers.dtos.UniversiteDTO;
 import org.springframework.web.bind.annotation.*;
-import com.esprit.kaddem.Entities.Universite;
-import com.esprit.kaddem.Services.IUniversiteService;
+import com.esprit.kaddem.entities.Universite;
+import com.esprit.kaddem.services.IUniversiteService;
 import java.util.List;
 
 @RestController
@@ -17,9 +16,9 @@ public class UniversiteRestController {
     @GetMapping("/retrieve-all-universites")
     @ResponseBody
     public List<Universite> getUniversites() {
-        List<Universite> listUniversites = universiteService.retrieveAllUniversites();
-        return listUniversites;
+        return universiteService.retrieveAllUniversites();
     }
+
 
     // http://localhost:8089/Kaddem/universite/retrieve-universite/8
     @GetMapping("/retrieve-universite/{universite-id}")
@@ -31,17 +30,28 @@ public class UniversiteRestController {
     // http://localhost:8089/Kaddem/universite/add-universite
     @PostMapping("/add-universite")
     @ResponseBody
-    public Universite addUniversite(@RequestBody Universite u) {
-        Universite universite = universiteService.addUniversite(u);
-        return universite;
+    public UniversiteDTO addUniversite(@RequestBody UniversiteDTO universiteDTO) {
+        Universite universite = new Universite();
+        universite.setNomUniv(universiteDTO.getNomUniv());
+
+        // Utilisez le service pour ajouter l'entité Universite
+
+        UniversiteDTO responseDTO = new UniversiteDTO();
+        responseDTO.setNomUniv(universite.getNomUniv());
+
+        return responseDTO;
     }
 
     // http://localhost:8089/Kaddem/universite/update-universite
     @PutMapping("/update-universite")
     @ResponseBody
-    public Universite updateUniversite(@RequestBody Universite u) {
-        Universite universite= universiteService.updateUniversite(u);
-        return universite;
+    public Universite updateUniversite(@RequestBody UniversiteDTO universiteDTO) {
+        Universite universite = new Universite();
+        universite.setNomUniv(universiteDTO.getNomUniv());
+
+        Universite updatedUniversite = universiteService.updateUniversite(universite);
+
+        return updatedUniversite;
     }
 
 //    // http://localhost:8089/Kaddem/universite/assignUniversiteToDepartement/1/1
