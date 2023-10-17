@@ -41,10 +41,9 @@ public class UniversiteRestController {
         Universite universite = new Universite();
         universite.setNomUniv(universiteDTO.getNomUniv());
 
-        Universite savedUniversite = universiteService.addUniversite(universite);
-
-        return savedUniversite;
+        return universiteService.addUniversite(universite);
     }
+
 
     // http://localhost:8089/Kaddem/universite/update-universite
     @PutMapping("/update-universite")
@@ -54,9 +53,7 @@ public class UniversiteRestController {
         Universite universite = new Universite();
         universite.setNomUniv(universiteDTO.getNomUniv());
 
-        Universite updatedUniversite = universiteService.updateUniversite(universite);
-
-        return updatedUniversite;
+        return universiteService.updateUniversite(universite);
     }
 
     // http://localhost:8089/Kaddem/universite/assignUniversiteToDepartement/1/1
