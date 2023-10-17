@@ -1,4 +1,4 @@
-package com.esprit.kaddem.Entities;
+package com.esprit.kaddem.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

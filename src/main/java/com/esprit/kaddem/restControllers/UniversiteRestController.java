@@ -1,9 +1,9 @@
-package com.esprit.kaddem.RestControllers;
+package com.esprit.kaddem.restControllers;
 
-import com.esprit.kaddem.RestControllers.dtos.UniversiteDTO;
+import com.esprit.kaddem.restControllers.dtos.UniversiteDTO;
 import org.springframework.web.bind.annotation.*;
-import com.esprit.kaddem.Entities.Universite;
-import com.esprit.kaddem.Services.IUniversiteService;
+import com.esprit.kaddem.entities.Universite;
+import com.esprit.kaddem.services.IUniversiteService;
 import java.util.List;
 
 @RestController
