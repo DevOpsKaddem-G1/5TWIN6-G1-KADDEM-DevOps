@@ -1,6 +1,6 @@
-package com.esprit.kaddem.Repositories;
+package com.esprit.kaddem.repositories;
 
-import com.esprit.kaddem.Entities.Universite;
+import com.esprit.kaddem.entities.Universite;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

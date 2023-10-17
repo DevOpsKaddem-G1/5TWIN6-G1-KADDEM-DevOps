@@ -1,6 +1,6 @@
-package com.esprit.kaddem.Services;
+package com.esprit.kaddem.services;
 
-import com.esprit.kaddem.Entities.Universite;
+import com.esprit.kaddem.entities.Universite;
 
 import java.util.List;
 
