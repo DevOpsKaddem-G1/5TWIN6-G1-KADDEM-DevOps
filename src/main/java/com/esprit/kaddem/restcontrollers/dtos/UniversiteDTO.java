@@ -1,4 +1,4 @@
-package com.esprit.kaddem.restControllers.dtos;
+package com.esprit.kaddem.restcontrollers.dtos;
 
 public class UniversiteDTO {
     private String nomUniv;

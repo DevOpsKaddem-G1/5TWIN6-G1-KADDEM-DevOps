@@ -1,6 +1,6 @@
-package com.esprit.kaddem.restControllers;
+package com.esprit.kaddem.restcontrollers;
 
-import com.esprit.kaddem.restControllers.dtos.UniversiteDTO;
+import com.esprit.kaddem.restcontrollers.dtos.UniversiteDTO;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.kaddem.entities.Universite;
 import com.esprit.kaddem.services.IUniversiteService;
