@@ -97,15 +97,14 @@ public class Contrat implements Serializable {
                 '}';
     }
 
-    // public Contrat(Integer idContrat, Date dateDebutContrat, Date dateFinContrat,
-    // Specialite specialite, Boolean archived, Integer montantContrat, Etudiant
-    // etudiant) {
-    // this.idContrat = idContrat;
-    // this.dateDebutContrat = dateDebutContrat;
-    // this.dateFinContrat = dateFinContrat;
-    // this.specialite = specialite;
-    // this.archived = archived;
-    // this.montantContrat = montantContrat;
-    // this.etudiant = etudiant;
-    // }
+    public Contrat(Integer idContrat, Date dateDebutContrat, Date dateFinContrat, Specialite specialite,
+            Boolean archived, Integer montantContrat) {
+        this.idContrat = idContrat;
+        this.dateDebutContrat = dateDebutContrat;
+        this.dateFinContrat = dateFinContrat;
+        this.specialite = specialite;
+        this.archived = archived;
+        this.montantContrat = montantContrat;
+
+    }
 }
