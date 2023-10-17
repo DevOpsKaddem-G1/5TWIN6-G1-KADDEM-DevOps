@@ -36,9 +36,9 @@ public class Etudiant  implements Serializable {
                 ", prenomE='" + prenomE + '\'' +
                 ", nomE='" + nomE + '\'' +
                 ", op=" + op +
-                //", departement=" + departement +
-                //", equipes=" + equipes +
-                //", contrats=" + contrats +
+                ", departement=" + departement +
+                ", equipes=" + equipes +
+                ", contrats=" + contrats +
                 '}';
     }
 
@@ -50,9 +50,9 @@ public class Etudiant  implements Serializable {
         this.prenomE = prenomE;
         this.nomE = nomE;
         this.op = op;
-        //this.departement = departement;
-        //this.equipes = equipes;
-        //this.contrats = contrats;
+        this.departement = departement;
+        this.equipes = equipes;
+        this.contrats = contrats;
     }
 
     public Integer getIdEtudiant() {
@@ -87,7 +87,7 @@ public class Etudiant  implements Serializable {
         this.op = op;
     }
 
-    /*
+
 
     public Departement getDepartement() {
         return departement;
@@ -123,7 +123,7 @@ public class Etudiant  implements Serializable {
             @OneToMany(mappedBy = "etudiant")
             @JsonIgnore
             private List<Contrat> contrats;
-    */
+
 
 
 }
