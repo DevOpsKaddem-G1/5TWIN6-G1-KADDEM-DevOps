@@ -1,11 +1,11 @@
-package com.esprit.kaddem.services;
+package com.esprit.kaddem.Services;
 
 
 
 import java.util.Date;
 import java.util.List;
 
-import com.esprit.kaddem.entities.Contrat;
+import com.esprit.kaddem.Entities.Contrat;
 
 public interface IContratService {
     // List<Contrat> retrieveAllContrats();

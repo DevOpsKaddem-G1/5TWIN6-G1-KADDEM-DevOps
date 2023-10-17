@@ -1,12 +1,12 @@
-package com.esprit.kaddem.services;
+package com.esprit.kaddem.Services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.esprit.kaddem.entities.Contrat;
-import com.esprit.kaddem.repositories.ContratRepository;
+import com.esprit.kaddem.Entities.Contrat;
+import com.esprit.kaddem.Repositories.ContratRepository;
 
 import javax.transaction.Transactional;
 import java.util.Date;

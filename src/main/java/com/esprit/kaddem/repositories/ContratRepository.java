@@ -1,11 +1,11 @@
-package com.esprit.kaddem.repositories;
+package com.esprit.kaddem.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.esprit.kaddem.entities.Contrat;
+import com.esprit.kaddem.Entities.Contrat;
 
 import java.util.Date;
 import java.util.List;

@@ -6,8 +6,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
-import com.esprit.kaddem.entities.Contrat;
-import com.esprit.kaddem.services.IContratService;
+import com.esprit.kaddem.Entities.Contrat;
+import com.esprit.kaddem.Services.IContratService;
 import java.util.Date;
 import java.util.List;
 

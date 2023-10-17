@@ -1,4 +1,4 @@
-package com.esprit.kaddem.entities;
+package com.esprit.kaddem.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,9 +21,9 @@ public class Contrat implements Serializable {
     private Specialite specialite;
     private Boolean archived;
     private Integer montantContrat;
-//     @ManyToOne
-//    // @JsonIgnore
-//     private  Etudiant etudiant;
+    // @ManyToOne
+    // // @JsonIgnore
+    // private Etudiant etudiant;
 
     public Integer getIdContrat() {
         return idContrat;
@@ -50,7 +50,7 @@ public class Contrat implements Serializable {
     }
 
     // public Etudiant getEtudiant() {
-    //     return etudiant;
+    // return etudiant;
     // }
 
     public void setIdContrat(Integer idContrat) {
@@ -78,7 +78,7 @@ public class Contrat implements Serializable {
     }
 
     // public void setEtudiant(Etudiant etudiant) {
-    //     this.etudiant = etudiant;
+    // this.etudiant = etudiant;
     // }
 
     public Contrat() {
@@ -97,13 +97,15 @@ public class Contrat implements Serializable {
                 '}';
     }
 
-    // public Contrat(Integer idContrat, Date dateDebutContrat, Date dateFinContrat, Specialite specialite, Boolean archived, Integer montantContrat, Etudiant etudiant) {
-    //     this.idContrat = idContrat;
-    //     this.dateDebutContrat = dateDebutContrat;
-    //     this.dateFinContrat = dateFinContrat;
-    //     this.specialite = specialite;
-    //     this.archived = archived;
-    //     this.montantContrat = montantContrat;
-    //     this.etudiant = etudiant;
+    // public Contrat(Integer idContrat, Date dateDebutContrat, Date dateFinContrat,
+    // Specialite specialite, Boolean archived, Integer montantContrat, Etudiant
+    // etudiant) {
+    // this.idContrat = idContrat;
+    // this.dateDebutContrat = dateDebutContrat;
+    // this.dateFinContrat = dateFinContrat;
+    // this.specialite = specialite;
+    // this.archived = archived;
+    // this.montantContrat = montantContrat;
+    // this.etudiant = etudiant;
     // }
 }
