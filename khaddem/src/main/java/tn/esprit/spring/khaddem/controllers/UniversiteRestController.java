@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.spring.khaddem.controllers.dtos.UniversiteDTO;
 import tn.esprit.spring.khaddem.entities.Universite;
 import tn.esprit.spring.khaddem.services.IUniversiteService;
 import java.util.List;
@@ -38,9 +39,13 @@ public class UniversiteRestController {
     @PostMapping("/add-universite")
     @Operation(description = "ajouter une université")
     @ResponseBody
-    public Universite addUniversite(@RequestBody Universite u) {
-        Universite universite = universiteService.addUniversite(u);
-        return universite;
+    public Universite addUniversite(@RequestBody UniversiteDTO universiteDTO) {
+        Universite universite = new Universite();
+        universite.setNomUniv(universiteDTO.getNomUniv());
+
+        Universite savedUniversite = universiteService.addUniversite(universite);
+
+        return savedUniversite;
     }
 
     // http://localhost:8089/Kaddem/universite/update-universite
