@@ -23,10 +23,8 @@ public class UniversiteRestController {
     @Operation(description = "récupérer la liste des universités")
     @ResponseBody
     public List<Universite> getUniversites() {
-        List<Universite> listUniversites = universiteService.retrieveAllUniversites();
-        return listUniversites;
+        return universiteService.retrieveAllUniversites();
     }
-
     // http://localhost:8089/Kaddem/universite/retrieve-universite/8
     @GetMapping("/retrieve-universite/{universite-id}")
     @Operation(description = "récupérer une université par son id")
