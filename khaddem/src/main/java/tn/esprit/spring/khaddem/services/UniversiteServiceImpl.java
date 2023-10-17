@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.khaddem.entities.Departement;
 import tn.esprit.spring.khaddem.entities.Universite;
+import tn.esprit.spring.khaddem.exceptions.UniversiteNotFoundException;
 import tn.esprit.spring.khaddem.repositories.DepartementRepository;
 import tn.esprit.spring.khaddem.repositories.UniversiteRepository;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -37,8 +39,15 @@ public class UniversiteServiceImpl implements  IUniversiteService{
 
     @Override
     public Universite retrieveUniversite(Integer idUniversite) {
-        return universiteRepository.findById(idUniversite).get();
+        Optional<Universite> optionalUniversite = universiteRepository.findById(idUniversite);
+        if (optionalUniversite.isPresent()) {
+            return optionalUniversite.get(); // Accédez à la valeur après avoir vérifié la présence.
+        } else {
+            // Gérez le cas où l'objet n'est pas présent (par exemple, en renvoyant null ou en levant une exception UniversiteNotFoundException).
+            throw new UniversiteNotFoundException("Université introuvable pour l'ID : " + idUniversite);
+        }
     }
+
 
     @Transactional
     public void assignUniversiteToDepartement(Integer universiteId, Integer departementId) {
