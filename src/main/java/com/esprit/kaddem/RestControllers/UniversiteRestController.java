@@ -16,9 +16,9 @@ public class UniversiteRestController {
     @GetMapping("/retrieve-all-universites")
     @ResponseBody
     public List<Universite> getUniversites() {
-        List<Universite> listUniversites = universiteService.retrieveAllUniversites();
-        return listUniversites;
+        return universiteService.retrieveAllUniversites();
     }
+
 
     // http://localhost:8089/Kaddem/universite/retrieve-universite/8
     @GetMapping("/retrieve-universite/{universite-id}")
