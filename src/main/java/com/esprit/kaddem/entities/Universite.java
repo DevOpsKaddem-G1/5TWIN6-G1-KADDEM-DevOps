@@ -1,5 +1,6 @@
 package com.esprit.kaddem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,7 +21,7 @@ public class Universite implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUniversite;
     private String nomUniv;
-//    @OneToMany(cascade = CascadeType.ALL)
-  //  @JsonIgnore
-//    private List<Departement>departements;
+    @OneToMany(cascade = CascadeType.ALL)
+      @JsonIgnore
+    private List<Departement> departements;
 }
