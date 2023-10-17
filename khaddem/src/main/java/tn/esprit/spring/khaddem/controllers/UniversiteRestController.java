@@ -52,9 +52,13 @@ public class UniversiteRestController {
     @PutMapping("/update-universite")
     @Operation(description = "modifier une université")
     @ResponseBody
-    public Universite updateUniversite(@RequestBody Universite u) {
-        Universite universite= universiteService.updateUniversite(u);
-        return universite;
+    public Universite updateUniversite(@RequestBody UniversiteDTO universiteDTO) {
+        Universite universite = new Universite();
+        universite.setNomUniv(universiteDTO.getNomUniv());
+
+        Universite updatedUniversite = universiteService.updateUniversite(universite);
+
+        return updatedUniversite;
     }
 
     // http://localhost:8089/Kaddem/universite/assignUniversiteToDepartement/1/1
