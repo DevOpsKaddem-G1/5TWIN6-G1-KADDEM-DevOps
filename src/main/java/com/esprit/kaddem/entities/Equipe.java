@@ -25,7 +25,7 @@ public class Equipe  implements Serializable {
     private Niveau niveau;
 
     @ManyToMany(mappedBy = "equipes",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-   @JsonIgnore
+   //@JsonIgnore
     private List<Etudiant> etudiants;
 
 
