@@ -118,7 +118,6 @@ public class Etudiant  implements Serializable {
             @JsonIgnore
             private Departement departement;
             @ManyToMany
-
             @JsonIgnore
             private List<Equipe> equipes;
             @OneToMany(mappedBy = "etudiant")
