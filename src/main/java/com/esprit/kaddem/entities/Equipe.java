@@ -1,7 +1,6 @@
 package com.esprit.kaddem.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Equipe  implements Serializable {
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Integer idEquipe;
@@ -28,5 +26,8 @@ public class Equipe  implements Serializable {
    //@JsonIgnore
     private List<Etudiant> etudiants;
 
-
+    public Equipe(int id, String name) {
+        this.idEquipe = id;
+        this.nomEquipe = name;
+    }
 }
