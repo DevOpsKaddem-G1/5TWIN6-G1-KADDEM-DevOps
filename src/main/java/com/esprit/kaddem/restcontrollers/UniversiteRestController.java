@@ -2,14 +2,16 @@ package com.esprit.kaddem.restcontrollers;
 
 import com.esprit.kaddem.restcontrollers.dtos.UniversiteDTO;
 import com.esprit.kaddem.services.UniversiteServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.kaddem.entities.Universite;
 import java.util.List;
 
 @RestController
 @RequestMapping("/universite")
-
 public class UniversiteRestController {
+
+    @Autowired
     UniversiteServiceImpl universiteService;
 
     // http://localhost:8089/Kaddem/universite/retrieve-all-universites

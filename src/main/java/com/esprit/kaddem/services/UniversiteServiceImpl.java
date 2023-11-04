@@ -1,4 +1,5 @@
 package com.esprit.kaddem.services;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.kaddem.entities.Universite;
 import com.esprit.kaddem.repositories.UniversiteRepository;
@@ -9,6 +10,7 @@ import java.util.Optional;
 @Service
 public class UniversiteServiceImpl implements IUniversiteService{
 
+    @Autowired
     UniversiteRepository universiteRepository;
 //    public UniversiteServiceImpl() {
 //    }
