@@ -1,5 +1,4 @@
 package com.esprit.kaddem.services;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.kaddem.entities.Universite;
 import com.esprit.kaddem.repositories.UniversiteRepository;
@@ -11,8 +10,8 @@ import java.util.Optional;
 public class UniversiteServiceImpl implements IUniversiteService{
 
     UniversiteRepository universiteRepository;
-    public UniversiteServiceImpl() {
-    }
+//    public UniversiteServiceImpl() {
+//    }
 
     public List<Universite> retrieveAllUniversites() {
         return universiteRepository.findAll();
@@ -31,8 +30,7 @@ public class UniversiteServiceImpl implements IUniversiteService{
         Optional<Universite> optionalUniversite = universiteRepository.findById(idUniversite);
 
         if (optionalUniversite.isPresent()) {
-            Universite u = optionalUniversite.get();
-            return u;
+            return optionalUniversite.get();
         } else {
             // Gérer le cas où l'université n'a pas été trouvée
             return null; // ou lancer une exception appropriée
