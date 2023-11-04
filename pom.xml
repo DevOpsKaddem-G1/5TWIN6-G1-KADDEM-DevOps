@@ -100,8 +100,13 @@
 		</plugins>
 	</build>
 	<distributionManagement>
-		<repository>		<id>deploymentRepo</id>
-		<url>http://10.0.2.15:8081/repository/maven-releases/</url>
+		<snapshotRepository>
+			<id>nexusdeploymentrepo</id>
+			<url>http://10.0.2.15:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>nexusdeploymentrepo</id>
+			<url>http://10.0.2.15:8081/repository/maven-releases/</url>
 		</repository>
 
 	</distributionManagement>
