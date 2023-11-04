@@ -1,6 +1,7 @@
 package com.esprit.kaddem.restcontrollers;
 
 import com.esprit.kaddem.restcontrollers.dtos.UniversiteDTO;
+import com.esprit.kaddem.services.UniversiteServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.kaddem.entities.Universite;
 import com.esprit.kaddem.services.IUniversiteService;
@@ -10,7 +11,7 @@ import java.util.List;
 @RequestMapping("/universite")
 
 public class UniversiteRestController {
-    IUniversiteService universiteService;
+    UniversiteServiceImpl universiteService;
 
     // http://localhost:8089/Kaddem/universite/retrieve-all-universites
     @GetMapping("/retrieve-all-universites")

@@ -13,5 +13,6 @@ public interface IUniversiteService {
 
     Universite retrieveUniversite (Integer idUniversite);
 
+    public  void deleteUniversite(Integer idUniversite);
 
 }
