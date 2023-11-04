@@ -5,11 +5,12 @@ import com.esprit.kaddem.entities.Universite;
 import com.esprit.kaddem.repositories.UniversiteRepository;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 @Service
 public class UniversiteServiceImpl implements IUniversiteService{
-    @Autowired
+
+//    @Autowired
     UniversiteRepository universiteRepository;
     public UniversiteServiceImpl() {
         // TODO Auto-generated constructor stub
@@ -26,10 +27,18 @@ public class UniversiteServiceImpl implements IUniversiteService{
         return  (universiteRepository.save(u));
     }
 
-    public Universite retrieveUniversite (Integer idUniversite){
-        Universite u = universiteRepository.findById(idUniversite).get();
-        return  u;
+    public Universite retrieveUniversite(Integer idUniversite) {
+        Optional<Universite> optionalUniversite = universiteRepository.findById(idUniversite);
+
+        if (optionalUniversite.isPresent()) {
+            Universite u = optionalUniversite.get();
+            return u;
+        } else {
+            // Gérer le cas où l'université n'a pas été trouvée
+            return null; // ou lancer une exception appropriée
+        }
     }
+
     public  void deleteUniversite(Integer idUniversite){
         universiteRepository.delete(retrieveUniversite(idUniversite));
     }
