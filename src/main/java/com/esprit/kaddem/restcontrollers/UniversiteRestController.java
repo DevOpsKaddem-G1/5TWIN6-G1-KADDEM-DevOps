@@ -4,7 +4,6 @@ import com.esprit.kaddem.restcontrollers.dtos.UniversiteDTO;
 import com.esprit.kaddem.services.UniversiteServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.kaddem.entities.Universite;
-import com.esprit.kaddem.services.IUniversiteService;
 import java.util.List;
 
 @RestController
@@ -50,9 +49,8 @@ public class UniversiteRestController {
         Universite universite = new Universite();
         universite.setNomUniv(universiteDTO.getNomUniv());
 
-        Universite updatedUniversite = universiteService.updateUniversite(universite);
-
-        return updatedUniversite;
+        return universiteService.updateUniversite(universite);
     }
+
 
 }

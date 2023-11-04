@@ -13,7 +13,7 @@ public class UniversiteServiceImpl implements IUniversiteService{
     UniversiteRepository universiteRepository;
     public UniversiteServiceImpl() {
     }
-    
+
     public List<Universite> retrieveAllUniversites() {
         return universiteRepository.findAll();
     }
