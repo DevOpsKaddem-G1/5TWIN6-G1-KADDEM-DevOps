@@ -10,14 +10,14 @@ import java.util.Optional;
 @Service
 public class UniversiteServiceImpl implements IUniversiteService{
 
-//    @Autowired
     UniversiteRepository universiteRepository;
     public UniversiteServiceImpl() {
-        // TODO Auto-generated constructor stub
     }
-    public   List<Universite> retrieveAllUniversites(){
-        return (List<Universite>) universiteRepository.findAll();
+    
+    public List<Universite> retrieveAllUniversites() {
+        return universiteRepository.findAll();
     }
+
 
     public    Universite addUniversite (Universite  u){
         return  (universiteRepository.save(u));
