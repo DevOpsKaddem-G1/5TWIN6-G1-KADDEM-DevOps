@@ -2,20 +2,18 @@ version: "3.9"
 services:
 
   Item:
-    container_name: MicroserviceItem-s
-    build: .\MicroserviceItem
+    container_name: Kaddem-s
+    build: .\Kaddem
     ports:
       - "8085:8085"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/kaddemApp?createDatabaseIfNotExist=true&userSSL=false
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/      
     restart: unless-stopped
 
-    image: "microitem"
+    image: "kaddem"
     depends_on:
-      - Eureka
       - db-mysql
 
   db-mysql:
