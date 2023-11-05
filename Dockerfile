@@ -1,4 +1,6 @@
-FROM openjdk:1.8
+FROM openjdk:11
 EXPOSE 8085
-ADD target/Kaddem-2.7.jar Kaddem-2.7.jar
-ENTRYPOINT ["java","-jar","Kaddem-2.7.jar"]
+WORKDIR /app
+RUN apt-get update && apt-get install -y curl
+RUN curl -o kaddem-2.8.jar -L "http://10.0.2.15:8081/repository/maven-releases/com/esprit/kaddem/2.8/kaddem-2.8.jar"
+ENTRYPOINT ["java", "-jar", "kaddem-2.8.jar"]
