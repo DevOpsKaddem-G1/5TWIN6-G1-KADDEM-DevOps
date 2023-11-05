@@ -2,7 +2,7 @@ version: "2"
 services:
   spring:
     depends_on: [mysql]
-    image: benismail/kaddem:2-2
+    image: benismail/kaddem:2-3
     restart: unless-stopped
     ports:
       - "8085:8085"
