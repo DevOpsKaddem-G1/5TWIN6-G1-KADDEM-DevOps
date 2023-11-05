@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
     container_name: mysql-db
     environment:
-      MYSQL_DATABASE: kaddemdb
+      MYSQL_DATABASE: kaddemApp
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
     ports:
