@@ -1,30 +1,18 @@
-version: "3.9"
+version: "2"
 services:
-
-  Item:
-    container_name: Kaddem-s
-    build: .\Kaddem
+  spring:
+    depends_on: [mysql]
+    image: benismailaziz/kaddem:1-0
+    restart: unless-stopped
     ports:
       - "8085:8085"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/kaddemApp?createDatabaseIfNotExist=true&userSSL=false
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
+  mysql:
+    image: mysql:latest
     restart: unless-stopped
-
-    image: "kaddem"
-    depends_on:
-      - db-mysql
-
-  db-mysql:
-      image: "mysql:5.6"
-      container_name: db-mysql  
-      environment:
-        - MYSQL_ROOT_PASSWORD=root
-        #- MYSQL_DATABASE=job
-      ports:
-        - "3306:3306"
-      restart: unless-stopped  
-
-
-
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: kaddemdb
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3307:3306"
