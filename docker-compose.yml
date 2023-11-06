@@ -2,7 +2,7 @@ version: "3.7"
 services:
   Kaddem:
     container_name: Kaddem-s
-    build: 'C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps'
+    build: ../5TWIN6-G1-KADDEM-DevOps
     ports:
       - "8085:8085"
     environment:
@@ -11,7 +11,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
     restart: unless-stopped
 
-    image: azizbenismail/kaddem:1.0.8
+    image: azizbenismail/kaddem:1.0.9
     depends_on:
       - db-mysql
 
