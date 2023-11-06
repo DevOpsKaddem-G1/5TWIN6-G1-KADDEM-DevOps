@@ -1,0 +1,101 @@
+systemctl jenkins
+-------------pipline------------
+pipeline {
+    agent any
+  tools {
+        maven 'M2_HOME'
+    }
+    stages {
+        stage('Checkout Git repository') {
+            steps {
+                echo 'Pulling ';
+                git branch: 'Aziz-Ben-Ismail-Universite', credentialsId: '50149f68-5226-4b9f-acb4-c0b99e149e50', url: 'https://github.com/DevOpsKaddem-G1/5TWIN6-G1-KADDEM-DevOps.git&#39;;
+            }
+        }
+         stage('Version Maven') {
+            steps {
+                sh """mvn -version""";
+            }
+        }
+         stage('Mvn Clean') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
+        stage('Maven Compile') {
+            steps {
+                echo 'Running Maven Compile'
+                sh 'mvn compile'
+            }
+        }
+        stage('JUnit / Mockito Tests') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Build package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('Maven Install') {
+            steps {
+                sh 'mvn install'
+            }
+        }
+        stage('Rapport JaCoCo ') {
+            steps {
+                sh 'mvn test'
+                // Generate JaCoCo coverage report
+                sh 'mvn jacoco:report'
+            }
+        }
+        stage('JaCoCo coverage report') {
+            steps {
+                step([$class: 'JacocoPublisher',
+      execPattern: '**/target/jacoco.exec',
+      classPattern: '**/classes',
+      sourcePattern: '**/src',
+      exclusionPattern: '*/target/**/,**/*Test*,**/*_javassist/**'
+])
+
+            }
+        }
+        stage("mvn SonarQube") {
+            steps {
+                withSonarQubeEnv('SonarQubeBenIsmail')
+                {
+            sh 'mvn sonar:sonar'
+                }        
+            }
+        }
+        stage('Deploy to Nexus') {
+            steps {
+                sh 'mvn deploy'
+            }
+        }
+        stage('Build Docker Image (Spring Part)') {
+            steps {
+                script {
+                    sh 'sudo chmod 666 /var/run/docker.sock'
+                    def dockerImage=docker.build("azizbenismail/kaddem:3.4")
+                }
+            }
+        }
+       
+        stage('Push Docker Image to DockerHub') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerpwd')]) {
+                        sh '''
+                        docker login -u azizbenismail -p "$dockerpwd"
+                        docker push azizbenismail/kaddem:3.4
+                        '''
+                    }
+                }
+            }
+        }
+       
+    }
+   
+}
