@@ -2,5 +2,5 @@ FROM openjdk:11
 EXPOSE 8085
 WORKDIR /app
 RUN apt-get update && apt-get install -y curl
-RUN curl -o kaddem-3.5.jar -L "http://10.0.2.15:8081/repository/maven-releases/com/esprit/kaddem/3.5/kaddem-3.5.jar"
-ENTRYPOINT ["java", "-jar", "kaddem-3.5.jar"]
+RUN curl -o kaddem-3.6.jar -L "http://10.0.2.15:8081/repository/maven-releases/com/esprit/kaddem/3.6/kaddem-3.6.jar"
+ENTRYPOINT ["java", "-jar", "kaddem-3.6.jar"]

@@ -1,27 +1,16 @@
-version: "3.7"
-services:
-  Kaddem:
-    container_name: Kaddem-s
-    build: 'C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps'
+sonarqube:
+  image: sonarqube:8.9.7-community
+  ports:
+    - "9000:9000"
+  nexus:
+    image: sonatype/nexus3
     ports:
-      - "8085:8085"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/kaddemApp?createDatabaseIfNotExist=true&userSSL=false
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-    restart: unless-stopped
-
-    image: "kaddem"
-    depends_on:
-      - db-mysql
-
-  db-mysql:
-    image: "mysql:5.6"
-    container_name: db-mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - "8081:8081"
+  prometheus:
+    image: prom/prometheus
     ports:
-      - "3306:3306"
-    restart: unless-stopped
-networks:
-  springapimysql-net:
+      - "9090:9090"
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
