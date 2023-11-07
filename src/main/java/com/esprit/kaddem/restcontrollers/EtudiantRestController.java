@@ -1,8 +1,6 @@
 package com.esprit.kaddem.restcontrollers;
 
 import com.esprit.kaddem.entities.Etudiant;
-import com.esprit.kaddem.entities.Niveau;
-import com.esprit.kaddem.entities.Specialite;
 import com.esprit.kaddem.services.IEtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
