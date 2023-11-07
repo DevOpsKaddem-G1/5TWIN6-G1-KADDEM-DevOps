@@ -1,15 +1,5 @@
 package com.esprit.kaddem.entities;
-
-
-import com.esprit.kaddem.entities.Contrat;
-import com.esprit.kaddem.entities.Departement;
-import com.esprit.kaddem.entities.Equipe;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -25,9 +15,6 @@ public class Etudiant  implements Serializable {
     private String nomE;
     @Enumerated(EnumType.STRING)
     private  Option op;
-
-
-
 
     @Override
     public String toString() {
@@ -88,7 +75,6 @@ public class Etudiant  implements Serializable {
     }
 
 
-
     public Departement getDepartement() {
         return departement;
     }
@@ -123,7 +109,5 @@ public class Etudiant  implements Serializable {
             @OneToMany(mappedBy = "etudiant")
             @JsonIgnore
             private List<Contrat> contrats;
-
-
 
 }
