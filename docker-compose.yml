@@ -11,7 +11,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
     restart: unless-stopped
 
-    image: azizbenismail/kaddem:1.1.7
+    image: azizbenismail/kaddem:1.1.8
     depends_on:
       - dbmysql
 
