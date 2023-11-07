@@ -1,0 +1,16 @@
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\restcontrollers\UniversiteRestController.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\services\UniversiteServiceImpl.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\exceptions\OrderNotFoundException.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\services\IUnivService.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\restcontrollers\dtos\UniversiteDTO.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\repositories\UniversiteRepository.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\entities\Universite.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\entities\Niveau.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\entities\Etudiant.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\entities\Contrat.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\services\IUniversiteService.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\entities\Equipe.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\KaddemApplication.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\entities\Departement.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\entities\Specialite.java
+C:\Users\aziz2\OneDrive\Bureau\5TWIN6-G1-KADDEM-DevOps\src\main\java\com\esprit\kaddem\entities\Option.java
