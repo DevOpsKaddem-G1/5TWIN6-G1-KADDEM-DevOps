@@ -53,4 +53,39 @@ public class EtudiantRepositoryTest {
         }
     }
 
+    @Test
+    public void testCreateEtudiant() {
+        //Student to be persisted
+        Etudiant etudiantToBePersisted = new Etudiant("Aziz", "Ben Hmida", Option.SAE);
+        //Returned value
+        Etudiant etudiantReturned = etudiantRepository.save(etudiantToBePersisted);
+
+        //Testing Student Id value
+        Assertions.assertThat(etudiantReturned.getIdEtudiant()).isNotNull();
+        Assertions.assertThat(etudiantReturned.getIdEtudiant()).isNotNegative();
+        Assertions.assertThat(etudiantReturned.getIdEtudiant()).isGreaterThan(0);
+        Assertions.assertThat(etudiantReturned.getIdEtudiant()).isEqualTo(etudiantToBePersisted.getIdEtudiant());
+
+        //Testing Student First Name value
+        Assertions.assertThat(etudiantReturned.getPrenomE()).isNotNull();
+        Assertions.assertThat(etudiantReturned.getPrenomE()).isNotEmpty();
+        Assertions.assertThat(etudiantReturned.getPrenomE()).hasSize(etudiantToBePersisted.getPrenomE().length());
+        Assertions.assertThat(etudiantReturned.getPrenomE()).isEqualTo(etudiantToBePersisted.getPrenomE());
+
+        //Testing Student Last Name value
+        Assertions.assertThat(etudiantReturned.getNomE()).isNotNull();
+        Assertions.assertThat(etudiantReturned.getNomE()).isNotEmpty();
+        Assertions.assertThat(etudiantReturned.getNomE()).hasSize(etudiantToBePersisted.getNomE().length());
+        Assertions.assertThat(etudiantReturned.getNomE()).isEqualTo(etudiantToBePersisted.getNomE());
+
+        //Testing Student Option value
+        Assertions.assertThat(etudiantReturned.getOp()).isNotNull();
+        // Checking that the returned option is one of the expected options
+        Assertions.assertThat(etudiantReturned.getOp()).isIn(Option.GAMIX, Option.SE, Option.SAE, Option.INFINI, Option.TWIN);
+        // Comparing that the returned option is the one we persisted or the expected option
+        Assertions.assertThat(etudiantReturned.getOp()).isEqualTo(etudiantToBePersisted.getOp());
+
+    }
+
+
 }
