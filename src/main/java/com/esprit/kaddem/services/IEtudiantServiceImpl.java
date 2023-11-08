@@ -24,14 +24,19 @@ public class IEtudiantServiceImpl implements IEtudiantService{
 
     @Override
     public Etudiant addEtudiant(Etudiant e) {
-        etudiantRepository.save(e);
-        return e;
+        return etudiantRepository.save(e);
     }
 
     @Override
     public Etudiant updateEtudiant(Etudiant e) {
-        etudiantRepository.save(e);
-        return e;
+        // Check if the entity already exists in the database
+        if (etudiantRepository.existsById(e.getIdEtudiant())) {
+            etudiantRepository.save(e);
+            return e;
+        } else {
+            // Handle the case where the entity doesn't exist
+            throw new EntityNotFoundException("Etudiant with ID " + e.getIdEtudiant() + " not found");
+        }
     }
 
     @Override
