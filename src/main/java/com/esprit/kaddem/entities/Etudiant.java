@@ -1,7 +1,8 @@
 package com.esprit.kaddem.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
-
+import java.util.List;
 
 @Entity
 public class Etudiant  implements Serializable {
@@ -22,17 +23,22 @@ public class Etudiant  implements Serializable {
                 ", prenomE='" + prenomE + '\'' +
                 ", nomE='" + nomE + '\'' +
                 ", op=" + op +
+                ", departement=" + departement +
+                ", equipes=" + equipes +
+                ", contrats=" + contrats +
                 '}';
     }
 
     public Etudiant() {
     }
 
+
     public Etudiant( String prenomE, String nomE, Option op) {
         this.prenomE = prenomE;
         this.nomE = nomE;
         this.op = op;
     }
+
 
     public Integer getIdEtudiant() {
         return idEtudiant;
@@ -65,5 +71,40 @@ public class Etudiant  implements Serializable {
     public void setOp(Option op) {
         this.op = op;
     }
+
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
+    }
+
+    public List<Contrat> getContrats() {
+        return contrats;
+    }
+
+    public void setContrats(List<Contrat> contrats) {
+        this.contrats = contrats;
+    }
+
+            @ManyToOne
+            @JsonIgnore
+            private Departement departement;
+            @ManyToMany
+            @JsonIgnore
+            private List<Equipe> equipes;
+            @OneToMany(mappedBy = "etudiant")
+            @JsonIgnore
+            private List<Contrat> contrats;
 
 }
