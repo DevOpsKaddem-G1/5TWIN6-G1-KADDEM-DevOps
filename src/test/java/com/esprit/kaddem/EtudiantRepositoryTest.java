@@ -14,19 +14,20 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)//JUnit5
 //@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 @Slf4j
-public class EtudiantRepositoryTest {
+class EtudiantRepositoryTest {
 
     @Autowired
     EtudiantRepository etudiantRepository;
 
     @BeforeEach
-    public void initiateDefaultUsers() {
+    void initiateDefaultUsers() {
         etudiantRepository.save(new Etudiant( "Salim", "Ben Younes", Option.SE));
         etudiantRepository.save(new Etudiant( "Aymen", "Chaaban", Option.GAMIX));
         etudiantRepository.save(new Etudiant( "Karim", "Trabelsi", Option.TWIN));
@@ -34,19 +35,19 @@ public class EtudiantRepositoryTest {
     }
 
     @AfterEach
-    public void destroyAll() {
+    void destroyAll() {
         etudiantRepository.deleteAll();
     }
 
     @Test
-    public void testGetAllEtudiants() {
+    void testGetAllEtudiants() {
         List<Etudiant> etudiantList = (List<Etudiant>) etudiantRepository.findAll();
-        Assertions.assertThat(etudiantList.size()).isEqualTo(4);
+        Assertions.assertThat(etudiantList).hasSize(4);
         for (Etudiant etudiant : etudiantList) {
             Assertions.assertThat(etudiant).isNotNull();
 
             // Add assertions for each field and value
-            Assertions.assertThat(etudiant.getIdEtudiant()).isNotNull().isNotNegative().isGreaterThan(0);
+            Assertions.assertThat(etudiant.getIdEtudiant()).isNotNull().isNotNegative().isPositive();
             Assertions.assertThat(etudiant.getPrenomE()).isNotNull().isNotEmpty();
             Assertions.assertThat(etudiant.getNomE()).isNotNull().isNotEmpty();
             Assertions.assertThat(etudiant.getOp()).isNotNull().isIn(Option.values());
@@ -54,7 +55,7 @@ public class EtudiantRepositoryTest {
     }
 
     @Test
-    public void testCreateEtudiant() {
+    void testCreateEtudiant() {
         //Student to be persisted
         Etudiant etudiantToBePersisted = new Etudiant("Aziz", "Ben Hmida", Option.SAE);
         //Returned value
@@ -63,7 +64,7 @@ public class EtudiantRepositoryTest {
         //Testing Student Id value
         Assertions.assertThat(etudiantReturned.getIdEtudiant()).isNotNull();
         Assertions.assertThat(etudiantReturned.getIdEtudiant()).isNotNegative();
-        Assertions.assertThat(etudiantReturned.getIdEtudiant()).isGreaterThan(0);
+        Assertions.assertThat(etudiantReturned.getIdEtudiant()).isPositive();
         Assertions.assertThat(etudiantReturned.getIdEtudiant()).isEqualTo(etudiantToBePersisted.getIdEtudiant());
 
         //Testing Student First Name value
@@ -87,7 +88,7 @@ public class EtudiantRepositoryTest {
     }
 
     @Test
-    public void testUpdateEtudiant() {
+    void testUpdateEtudiant() {
         // Create a new student
         Etudiant etudiantToBePersisted = new Etudiant("John", "Doe", Option.SE);
         Etudiant savedEtudiant = etudiantRepository.save(etudiantToBePersisted);
@@ -109,15 +110,15 @@ public class EtudiantRepositoryTest {
     }
 
     @Test
-    public void testDeleteEtudiant() {
+    void testDeleteEtudiant() {
+        // Arrange
         Etudiant etudiantToBePersisted = new Etudiant("Amen", "Jouini", Option.TWIN);
-        etudiantRepository.save(etudiantToBePersisted);
+        Etudiant savedEtudiant = etudiantRepository.save(etudiantToBePersisted);
+
+        // Act
         etudiantRepository.delete(etudiantToBePersisted);
-        Exception exception = assertThrows(NoSuchElementException.class, () -> {
-            etudiantRepository.findById(etudiantToBePersisted.getIdEtudiant()).get();
-        });
-        Assertions.assertThat(exception).isNotNull();
-        Assertions.assertThat(exception.getClass()).isEqualTo(NoSuchElementException.class);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("No value present");
+
+        // Assert
+        assertFalse(etudiantRepository.findById(savedEtudiant.getIdEtudiant()).isPresent());
     }
 }
