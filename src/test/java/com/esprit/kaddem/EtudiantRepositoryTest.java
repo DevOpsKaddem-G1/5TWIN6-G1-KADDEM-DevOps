@@ -108,4 +108,16 @@ public class EtudiantRepositoryTest {
         Assertions.assertThat(retrievedEtudiant.getOp()).isEqualTo(Option.GAMIX);
     }
 
+    @Test
+    public void testDeleteEtudiant() {
+        Etudiant etudiantToBePersisted = new Etudiant("Amen", "Jouini", Option.TWIN);
+        etudiantRepository.save(etudiantToBePersisted);
+        etudiantRepository.delete(etudiantToBePersisted);
+        Exception exception = assertThrows(NoSuchElementException.class, () -> {
+            etudiantRepository.findById(etudiantToBePersisted.getIdEtudiant()).get();
+        });
+        Assertions.assertThat(exception).isNotNull();
+        Assertions.assertThat(exception.getClass()).isEqualTo(NoSuchElementException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("No value present");
+    }
 }
