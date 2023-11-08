@@ -25,5 +25,32 @@ public class EtudiantRepositoryTest {
     @Autowired
     EtudiantRepository etudiantRepository;
 
+    @BeforeEach
+    public void initiateDefaultUsers() {
+        etudiantRepository.save(new Etudiant( "Salim", "Ben Younes", Option.SE));
+        etudiantRepository.save(new Etudiant( "Aymen", "Chaaban", Option.GAMIX));
+        etudiantRepository.save(new Etudiant( "Karim", "Trabelsi", Option.TWIN));
+        etudiantRepository.save(new Etudiant( "Elyes", "Boudhina", Option.INFINI));
+    }
+
+    @AfterEach
+    public void destroyAll() {
+        etudiantRepository.deleteAll();
+    }
+
+    @Test
+    public void testGetAllEtudiants() {
+        List<Etudiant> etudiantList = (List<Etudiant>) etudiantRepository.findAll();
+        Assertions.assertThat(etudiantList.size()).isEqualTo(4);
+        for (Etudiant etudiant : etudiantList) {
+            Assertions.assertThat(etudiant).isNotNull();
+
+            // Add assertions for each field and value
+            Assertions.assertThat(etudiant.getIdEtudiant()).isNotNull().isNotNegative().isGreaterThan(0);
+            Assertions.assertThat(etudiant.getPrenomE()).isNotNull().isNotEmpty();
+            Assertions.assertThat(etudiant.getNomE()).isNotNull().isNotEmpty();
+            Assertions.assertThat(etudiant.getOp()).isNotNull().isIn(Option.values());
+        }
+    }
 
 }
