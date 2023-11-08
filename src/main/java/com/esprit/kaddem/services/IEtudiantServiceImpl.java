@@ -2,6 +2,7 @@ package com.esprit.kaddem.services;
 
 import com.esprit.kaddem.entities.*;
 import com.esprit.kaddem.repositories.EtudiantRepository;
+import com.esprit.kaddem.restcontrollers.dtos.EtudiantDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,19 +24,20 @@ public class IEtudiantServiceImpl implements IEtudiantService{
     }
 
     @Override
-    public Etudiant addEtudiant(Etudiant e) {
-        return etudiantRepository.save(e);
+    public Etudiant addEtudiant(EtudiantDTO e) {
+        Etudiant etudiant = mapToEtudiant(e);
+        return etudiantRepository.save(etudiant);
     }
 
     @Override
-    public Etudiant updateEtudiant(Etudiant e) {
+    public Etudiant updateEtudiant(EtudiantDTO e) {
+        Etudiant etudiant = mapToEtudiant(e);
         // Check if the entity already exists in the database
-        if (etudiantRepository.existsById(e.getIdEtudiant())) {
-            etudiantRepository.save(e);
-            return e;
+        if (etudiantRepository.existsById(etudiant.getIdEtudiant())) {
+            return etudiantRepository.save(etudiant);
         } else {
             // Handle the case where the entity doesn't exist
-            throw new EntityNotFoundException("Etudiant with ID " + e.getIdEtudiant() + " not found");
+            throw new EntityNotFoundException("Etudiant with ID " + etudiant.getIdEtudiant() + " not found");
         }
     }
 
@@ -58,6 +60,14 @@ public class IEtudiantServiceImpl implements IEtudiantService{
         }else {
             return "Etudiant not found with id: " + idEtudiant;
         }
+    }
+    private Etudiant mapToEtudiant(EtudiantDTO etudiantDTO) {
+        Etudiant etudiant = new Etudiant();
+        etudiant.setIdEtudiant(etudiantDTO.getIdEtudiant());
+        etudiant.setPrenomE(etudiantDTO.getPrenomE());
+        etudiant.setNomE(etudiantDTO.getNomE());
+        etudiant.setOp(etudiantDTO.getOp());
+        return etudiant;
     }
 
 }
