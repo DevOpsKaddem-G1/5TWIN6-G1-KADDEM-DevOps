@@ -6,9 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
+import javax.persistence.EntityNotFoundException;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -35,7 +36,13 @@ public class IEtudiantServiceImpl implements IEtudiantService{
 
     @Override
     public Etudiant retrieveEtudiant(Integer idEtudiant) {
-        return etudiantRepository.findById(idEtudiant).get();
+        Optional<Etudiant> etudiantOptional =  etudiantRepository.findById(idEtudiant);
+        if (etudiantOptional.isPresent()) {
+            return etudiantOptional.get();
+        } else {
+            // Handle the case where the value is not present, e.g., throw an exception or return a default value.
+            throw new EntityNotFoundException("Etudiant not found with id: " + idEtudiant);
+        }
     }
 
     @Override
