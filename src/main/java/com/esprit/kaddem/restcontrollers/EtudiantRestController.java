@@ -12,12 +12,12 @@ import java.util.List;
 public class EtudiantRestController {
     @Autowired
     IEtudiantService etudiantService;
+
     // http://localhost:8089/Kaddem/etudiant/retrieve-all-etudiants
     @GetMapping("/retrieve-all-etudiants")
     @ResponseBody
     public List<Etudiant> getEtudiants() {
-        List<Etudiant> listEtudiants = etudiantService.retrieveAllEtudiants();
-        return listEtudiants;
+        return etudiantService.retrieveAllEtudiants();
     }
 
     // http://localhost:8089/Kaddem/etudiant/retrieve-etudiant/8
@@ -31,22 +31,20 @@ public class EtudiantRestController {
     @PostMapping("/add-etudiant")
     @ResponseBody
     public Etudiant addEtudiant(@RequestBody Etudiant e) {
-        Etudiant etudiant= etudiantService.addEtudiant(e);
-        return etudiant;
+        return etudiantService.addEtudiant(e);
     }
 
     // http://localhost:8089/Kaddem/etudiant/update-etudiant
     @PutMapping("/update-etudiant")
     @ResponseBody
     public Etudiant updateEtudiant(@RequestBody Etudiant e) {
-        Etudiant etudiant= etudiantService.updateEtudiant(e);
-        return etudiant;
+       return etudiantService.updateEtudiant(e);
     }
     // http://localhost:8089/Kaddem/etudiant/removeEtudiant
     @DeleteMapping("/removeEtudiant/{idEtudiant}")
     @ResponseBody
-    public void removeEtudiant(@PathVariable("idEtudiant") Integer idEtudiant) {
-        etudiantService.removeEtudiant(idEtudiant);
+    public String removeEtudiant(@PathVariable("idEtudiant") Integer idEtudiant) {
+        return etudiantService.removeEtudiant(idEtudiant);
     }
 
 }
