@@ -2,17 +2,11 @@ package com.esprit.kaddem.restcontrollers.dtos;
 
 import com.esprit.kaddem.entities.Option;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
-
 public class EtudiantDTO {
 
     private Integer idEtudiant;
     private String prenomE;
     private String nomE;
-
-    @Enumerated(EnumType.STRING)
     private Option op;
 
     public Integer getIdEtudiant() {
