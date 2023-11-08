@@ -51,8 +51,13 @@ public class IEtudiantServiceImpl implements IEtudiantService{
     }
 
     @Override
-    public void removeEtudiant(Integer idEtudiant) {
-        etudiantRepository.deleteById(idEtudiant);
+    public String removeEtudiant(Integer idEtudiant) {
+        if( etudiantRepository.findById(idEtudiant).isPresent()) {
+            etudiantRepository.deleteById(idEtudiant);
+            return "Etudiant deleted!";
+        }else {
+            return "Etudiant not found with id: " + idEtudiant;
+        }
     }
 
 }
