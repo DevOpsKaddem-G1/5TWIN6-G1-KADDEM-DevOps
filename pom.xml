@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.esprit</groupId>
 	<artifactId>Kaddem</artifactId>
-	<version>5</version>
+	<version>6</version>
 	<name>Kaddem</name>
 	<description>Kaddem</description>
 	<properties>
