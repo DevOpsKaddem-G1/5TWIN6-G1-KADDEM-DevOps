@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @AllArgsConstructor
-public class IEtudiantServiceImpl implements IEtudiantService{
+public class EtudiantServiceImpl implements IEtudiantService{
 
     EtudiantRepository etudiantRepository;
     @Override
