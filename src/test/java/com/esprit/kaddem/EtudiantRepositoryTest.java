@@ -84,8 +84,28 @@ public class EtudiantRepositoryTest {
         Assertions.assertThat(etudiantReturned.getOp()).isIn(Option.GAMIX, Option.SE, Option.SAE, Option.INFINI, Option.TWIN);
         // Comparing that the returned option is the one we persisted or the expected option
         Assertions.assertThat(etudiantReturned.getOp()).isEqualTo(etudiantToBePersisted.getOp());
-
     }
 
+    @Test
+    public void testUpdateEtudiant() {
+        // Create a new student
+        Etudiant etudiantToBePersisted = new Etudiant("John", "Doe", Option.SE);
+        Etudiant savedEtudiant = etudiantRepository.save(etudiantToBePersisted);
+
+        // Update the student's information
+        savedEtudiant.setPrenomE("UpdatedFirstName");
+        savedEtudiant.setNomE("UpdatedLastName");
+        savedEtudiant.setOp(Option.GAMIX);
+        Etudiant updatedEtudiant = etudiantRepository.save(savedEtudiant);
+
+        // Retrieve the updated etudiant from the repository
+        Etudiant retrievedEtudiant = etudiantRepository.findById(updatedEtudiant.getIdEtudiant())
+                .orElseThrow(NoSuchElementException::new);
+
+        // Verify that the etudiant's information has been updated correctly
+        Assertions.assertThat(retrievedEtudiant.getPrenomE()).isEqualTo("UpdatedFirstName");
+        Assertions.assertThat(retrievedEtudiant.getNomE()).isEqualTo("UpdatedLastName");
+        Assertions.assertThat(retrievedEtudiant.getOp()).isEqualTo(Option.GAMIX);
+    }
 
 }
