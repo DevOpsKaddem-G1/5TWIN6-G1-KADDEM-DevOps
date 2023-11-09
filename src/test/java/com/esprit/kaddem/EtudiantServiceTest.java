@@ -57,5 +57,21 @@ public class EtudiantServiceTest {
         assertEquals("Trabelsi", etudiantsList.get(2).getNomE());
         assertEquals(Option.TWIN, etudiantsList.get(2).getOp());
     }
+    @Test
+    public void testFindEtudiantById() {
+
+        //Arranging
+        Etudiant etudiant1 = new Etudiant( "Elyes", "Boudhina", Option.TWIN);
+        when(etudiantRepository.findById(etudiant1.getIdEtudiant())).thenReturn(Optional.of(etudiant1));
+
+        // Acting
+        Etudiant etudiantById = etudiantServiceImpl.retrieveEtudiant(etudiant1.getIdEtudiant());
+
+        //Asserting
+        assertNotEquals(etudiantById, null);
+        assertEquals(etudiantById.getPrenomE(), "Elyes");
+        assertEquals(etudiantById.getNomE(), "Boudhina");
+        assertEquals(etudiantById.getOp(), Option.TWIN);
+    }
 
 }
