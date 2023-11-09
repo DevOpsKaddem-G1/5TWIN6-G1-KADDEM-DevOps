@@ -1,6 +1,5 @@
 package com.esprit.kaddem.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.mockito.Mockito;
 
 import javax.persistence.*;
 import java.io.Serializable;
