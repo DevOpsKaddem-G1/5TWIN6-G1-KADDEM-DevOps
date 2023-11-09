@@ -28,6 +28,34 @@ public class EtudiantServiceTest {
     @InjectMocks
     EtudiantServiceImpl etudiantServiceImpl;
 
+    @Test
+    public void testGetAllEtudiants() {
 
+        //Creating 3 default students
+        Etudiant etudiant1 = new Etudiant( "Salim", "Ben Younes", Option.SE);
+        Etudiant etudiant2 = new Etudiant( "Aymen", "Chaaban", Option.GAMIX);
+        Etudiant etudiant3 = new Etudiant( "Karim", "Trabelsi", Option.TWIN);
+
+        when(etudiantRepository.findAll()).thenReturn(Arrays.asList(etudiant1, etudiant2, etudiant3));
+        List<Etudiant> etudiantsList = etudiantServiceImpl.retrieveAllEtudiants();
+
+        //Asserting size
+        assertEquals(etudiantsList.size(), 3);
+
+        //Asserting student 1 values
+        assertEquals(etudiantsList.get(0).getPrenomE(), "Salim");
+        assertEquals(etudiantsList.get(0).getNomE(), "Ben Younes");
+        assertEquals(etudiantsList.get(0).getOp(), Option.SE);
+
+        // Asserting student 2 values
+        assertEquals("Aymen", etudiantsList.get(1).getPrenomE());
+        assertEquals("Chaaban", etudiantsList.get(1).getNomE());
+        assertEquals(Option.GAMIX, etudiantsList.get(1).getOp());
+
+        // Asserting student 3 values
+        assertEquals("Karim", etudiantsList.get(2).getPrenomE());
+        assertEquals("Trabelsi", etudiantsList.get(2).getNomE());
+        assertEquals(Option.TWIN, etudiantsList.get(2).getOp());
+    }
 
 }
