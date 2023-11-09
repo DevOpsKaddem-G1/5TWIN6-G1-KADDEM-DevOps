@@ -28,9 +28,13 @@ public class DepartementServiceImpl implements IDepartementService{
 
     @Override
     public Departement addDepartement(DepartementDTO d) {
-        departementRepository.save(d);
-        return d;
+        Departement departement = new Departement();
+        departement.setName(d.getName());
+
+        departementRepository.save(departement);
+        return departement;
     }
+
 
     @Override
     public Departement updateDepartement(DepartementDTO departementDTO) {
