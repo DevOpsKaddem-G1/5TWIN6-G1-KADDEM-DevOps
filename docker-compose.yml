@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  db:
+    image: mysql:5.7
+    container_name: database
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: khaddemApp
+    networks:
+      - mynetwork
+
+  backend:
+    image: amalmelki/kaddem-backend:latest
+    restart: on-failure
+    ports:
+      - "8089:8089"
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+volumes:
+  mysql_data:
+
+networks:
+  mynetwork:
+    driver: bridge
