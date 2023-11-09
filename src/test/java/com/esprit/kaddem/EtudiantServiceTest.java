@@ -102,4 +102,23 @@ public class EtudiantServiceTest {
         return etudiant;
     }
 
+    @Test
+    public void testDeleteEtudiant() {
+        // Arrange
+        Etudiant etudiantToBeDeleted = new Etudiant("Firas", "Sbai", Option.INFINI);
+        etudiantToBeDeleted.setIdEtudiant(1); // Assuming an ID for testing purposes
+
+        // Stubbing the findById method to return the etudiantToBeDeleted when called with the specified ID
+        when(etudiantRepository.findById(eq(etudiantToBeDeleted.getIdEtudiant()))).thenReturn(Optional.of(etudiantToBeDeleted));
+
+        // Act
+        etudiantServiceImpl.removeEtudiant(etudiantToBeDeleted.getIdEtudiant());
+
+        // Verify that the findById method was called with the correct argument
+        verify(etudiantRepository, times(1)).findById(eq(etudiantToBeDeleted.getIdEtudiant()));
+
+        // Verify that the deleteById method was called with the correct argument
+        verify(etudiantRepository, times(1)).deleteById(eq(etudiantToBeDeleted.getIdEtudiant()));
+    }
+
 }
