@@ -1,8 +1,11 @@
 package com.esprit.kaddem.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.mockito.Mockito;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Etudiant  implements Serializable {
@@ -23,11 +26,30 @@ public class Etudiant  implements Serializable {
                 ", prenomE='" + prenomE + '\'' +
                 ", nomE='" + nomE + '\'' +
                 ", op=" + op +
-                ", departement=" + departement +
-                ", equipes=" + equipes +
-                ", contrats=" + contrats +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Etudiant other = (Etudiant) obj;
+        return Objects.equals(idEtudiant, other.idEtudiant) &&
+                Objects.equals(prenomE, other.prenomE) &&
+                Objects.equals(nomE, other.nomE) &&
+                op == other.op;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idEtudiant, prenomE, nomE, op);
+    }
+
+
 
     public Etudiant() {
     }
