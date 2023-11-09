@@ -74,4 +74,32 @@ public class EtudiantServiceTest {
         assertEquals(etudiantById.getOp(), Option.TWIN);
     }
 
+    @Test
+    public void testCreateEtudiant() {
+        EtudiantDTO etudiantDTO = new EtudiantDTO("Karim", "Trabelsi", Option.TWIN);
+        Etudiant etudiantToBeSaved = mapToEtudiant(etudiantDTO);  // Convert EtudiantDTO to Etudiant
+
+        // Stubbing the save method to return the same entity with an ID
+        when(etudiantRepository.save(any(Etudiant.class))).thenAnswer(invocation -> {
+            Etudiant savedEtudiant = invocation.getArgument(0);
+            return savedEtudiant;
+        });
+
+        // Act
+        Etudiant createdEtudiant = etudiantServiceImpl.addEtudiant(etudiantDTO);
+
+        // Perform assertions on the createdEtudiant
+        assertEquals("Karim", createdEtudiant.getPrenomE());
+        assertEquals("Trabelsi", createdEtudiant.getNomE());
+        assertEquals(Option.TWIN, createdEtudiant.getOp());
+
+        // Verifying that the save method was called with the correct argument
+        verify(etudiantRepository, times(1)).save(eq(etudiantToBeSaved)); // Use eq() for object equality check
+    }
+
+    private Etudiant mapToEtudiant(EtudiantDTO etudiantDTO) {
+        Etudiant etudiant = new Etudiant(etudiantDTO.getPrenomE(),etudiantDTO.getNomE(),etudiantDTO.getOp());
+        return etudiant;
+    }
+
 }
