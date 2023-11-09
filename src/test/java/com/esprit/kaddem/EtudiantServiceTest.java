@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-public class EtudiantServiceTest {
+class EtudiantServiceTest {
 
     @Mock
     EtudiantRepository etudiantRepository;
@@ -29,7 +29,7 @@ public class EtudiantServiceTest {
     EtudiantServiceImpl etudiantServiceImpl;
 
     @Test
-    public void testGetAllEtudiants() {
+    void testGetAllEtudiants() {
 
         //Creating 3 default students
         Etudiant etudiant1 = new Etudiant( "Salim", "Ben Younes", Option.SE);
@@ -40,12 +40,12 @@ public class EtudiantServiceTest {
         List<Etudiant> etudiantsList = etudiantServiceImpl.retrieveAllEtudiants();
 
         //Asserting size
-        assertEquals(etudiantsList.size(), 3);
+        assertEquals(3, etudiantsList.size());
 
         //Asserting student 1 values
-        assertEquals(etudiantsList.get(0).getPrenomE(), "Salim");
-        assertEquals(etudiantsList.get(0).getNomE(), "Ben Younes");
-        assertEquals(etudiantsList.get(0).getOp(), Option.SE);
+        assertEquals("Salim", etudiantsList.get(0).getPrenomE() );
+        assertEquals("Ben Younes", etudiantsList.get(0).getNomE());
+        assertEquals(Option.SE, etudiantsList.get(0).getOp());
 
         // Asserting student 2 values
         assertEquals("Aymen", etudiantsList.get(1).getPrenomE());
@@ -58,7 +58,7 @@ public class EtudiantServiceTest {
         assertEquals(Option.TWIN, etudiantsList.get(2).getOp());
     }
     @Test
-    public void testFindEtudiantById() {
+    void testFindEtudiantById() {
 
         //Arranging
         Etudiant etudiant1 = new Etudiant( "Elyes", "Boudhina", Option.TWIN);
@@ -68,14 +68,14 @@ public class EtudiantServiceTest {
         Etudiant etudiantById = etudiantServiceImpl.retrieveEtudiant(etudiant1.getIdEtudiant());
 
         //Asserting
-        assertNotEquals(etudiantById, null);
-        assertEquals(etudiantById.getPrenomE(), "Elyes");
-        assertEquals(etudiantById.getNomE(), "Boudhina");
-        assertEquals(etudiantById.getOp(), Option.TWIN);
+        assertNotEquals(null, etudiantById);
+        assertEquals("Elyes", etudiantById.getPrenomE());
+        assertEquals("Boudhina", etudiantById.getNomE());
+        assertEquals(Option.TWIN, etudiantById.getOp());
     }
 
     @Test
-    public void testCreateEtudiant() {
+    void testCreateEtudiant() {
         EtudiantDTO etudiantDTO = new EtudiantDTO("Karim", "Trabelsi", Option.TWIN);
         Etudiant etudiantToBeSaved = mapToEtudiant(etudiantDTO);  // Convert EtudiantDTO to Etudiant
 
@@ -94,31 +94,31 @@ public class EtudiantServiceTest {
         assertEquals(Option.TWIN, createdEtudiant.getOp());
 
         // Verifying that the save method was called with the correct argument
-        verify(etudiantRepository, times(1)).save(eq(etudiantToBeSaved)); // Use eq() for object equality check
+        verify(etudiantRepository, times(1)).save(etudiantToBeSaved); // Use eq() for object equality check
     }
 
     private Etudiant mapToEtudiant(EtudiantDTO etudiantDTO) {
-        Etudiant etudiant = new Etudiant(etudiantDTO.getPrenomE(),etudiantDTO.getNomE(),etudiantDTO.getOp());
+        Etudiant etudiant = new Etudiant(etudiantDTO.getPrenomE(), etudiantDTO.getNomE(), etudiantDTO.getOp());
         return etudiant;
     }
 
     @Test
-    public void testDeleteEtudiant() {
+    void testDeleteEtudiant() {
         // Arrange
         Etudiant etudiantToBeDeleted = new Etudiant("Firas", "Sbai", Option.INFINI);
         etudiantToBeDeleted.setIdEtudiant(1); // Assuming an ID for testing purposes
 
         // Stubbing the findById method to return the etudiantToBeDeleted when called with the specified ID
-        when(etudiantRepository.findById(eq(etudiantToBeDeleted.getIdEtudiant()))).thenReturn(Optional.of(etudiantToBeDeleted));
+        when(etudiantRepository.findById(etudiantToBeDeleted.getIdEtudiant())).thenReturn(Optional.of(etudiantToBeDeleted));
 
         // Act
         etudiantServiceImpl.removeEtudiant(etudiantToBeDeleted.getIdEtudiant());
 
         // Verify that the findById method was called with the correct argument
-        verify(etudiantRepository, times(1)).findById(eq(etudiantToBeDeleted.getIdEtudiant()));
+        verify(etudiantRepository, times(1)).findById(etudiantToBeDeleted.getIdEtudiant());
 
         // Verify that the deleteById method was called with the correct argument
-        verify(etudiantRepository, times(1)).deleteById(eq(etudiantToBeDeleted.getIdEtudiant()));
+        verify(etudiantRepository, times(1)).deleteById(etudiantToBeDeleted.getIdEtudiant());
     }
 
 }
