@@ -25,6 +25,6 @@ public class Departement implements Serializable {
     @JsonIgnore
     private List<Etudiant> etudiants;
 
-    public void setName(String name) {
-    }
+
+
 }

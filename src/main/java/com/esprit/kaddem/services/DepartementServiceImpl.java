@@ -29,7 +29,7 @@ public class DepartementServiceImpl implements IDepartementService{
     @Override
     public Departement addDepartement(DepartementDTO d) {
         Departement departement = new Departement();
-        departement.setName(d.getName());
+        departement.setNomDepart(d.getName());
 
         departementRepository.save(departement);
         return departement;
@@ -47,7 +47,7 @@ public class DepartementServiceImpl implements IDepartementService{
 
         // Update only the properties that are not null in the departementDTO
         if (departementDTO.getName() != null) {
-            existingDepartement.setName(departementDTO.getName());
+            existingDepartement.setNomDepart(departementDTO.getName());
         }
         // Add similar checks and updates for other properties as needed
 
