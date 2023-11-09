@@ -1,6 +1,7 @@
 package com.esprit.kaddem.restcontrollers;
 
 import com.esprit.kaddem.entities.Departement;
+import com.esprit.kaddem.restcontrollers.dto.DepartementDTO;
 import com.esprit.kaddem.services.IDepartementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +12,17 @@ import java.util.List;
 @RequestMapping("/departement")
 
 public class DepartementRestController {
+    private final IDepartementService departementService;
+
     @Autowired
-    IDepartementService departementService;
+    public DepartementRestController(IDepartementService departementService) {
+        this.departementService = departementService;
+    }
     // http://localhost:8089/Kaddem/departement/retrieve-all-departements
     @GetMapping("/retrieve-all-departements")
     @ResponseBody
     public List<Departement> getDepartements() {
-        List<Departement> listDepartements = departementService.retrieveAllDepartements();
-        return listDepartements;
+        return departementService.retrieveAllDepartements();
     }
 
     // http://localhost:8089/Kaddem/departement/retrieve-departement/8
@@ -31,18 +35,18 @@ public class DepartementRestController {
     // http://localhost:8089/Kaddem/departement/add-departement
     @PostMapping("/add-departement")
     @ResponseBody
-    public Departement addDepartement(@RequestBody Departement d) {
-        departementService.addDepartement(d);
-        return d;
+    public Departement addDepartement(@RequestBody DepartementDTO departementDTO) {
+        return departementService.addDepartement(departementDTO);
+
     }
 
     // http://localhost:8089/Kaddem/departement/update-departement
     @PutMapping("/update-departement")
     @ResponseBody
-    public Departement updateDepartement(@RequestBody Departement departement) {
-        Departement d= departementService.updateDepartement(departement);
-        return d;
+    public Departement updateDepartement(@RequestBody DepartementDTO departementDTO) {
+        return departementService.updateDepartement(departementDTO);
     }
+
 
 
 
@@ -50,8 +54,8 @@ public class DepartementRestController {
     @GetMapping("/retrieveDepartementsByUniversite/{idUniversite}")
     @ResponseBody
     public List<Departement> retrieveDepartementsByUniversite(@PathVariable("idUniversite") Integer idUniversite) {
-        List<Departement> listDepartements = departementService.retrieveDepartementsByUniversite(idUniversite);
-        return listDepartements;
+
+        return departementService.retrieveDepartementsByUniversite(idUniversite);
     }
 
 
