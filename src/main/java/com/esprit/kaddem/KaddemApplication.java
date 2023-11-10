@@ -2,7 +2,6 @@ package com.esprit.kaddem;
 
 import com.esprit.kaddem.entities.Universite;
 import com.esprit.kaddem.repositories.UniversiteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +14,6 @@ public class KaddemApplication {
 		SpringApplication.run(KaddemApplication.class, args);
 	}
 
-	@Autowired
 	private UniversiteRepository universiteRepository;
 
 	@Bean
