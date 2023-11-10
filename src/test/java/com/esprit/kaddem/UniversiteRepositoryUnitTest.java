@@ -26,43 +26,41 @@ public class UniversiteRepositoryUnitTest {
     UniversiteRepository universiteRepository;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         universiteRepository.save(new Universite(1,"Manar"));
         universiteRepository.save(new Universite(2,"Sfax"));
     }
 
     @AfterEach
-    public void destroy() {
+    void destroy() {
         universiteRepository.deleteAll();
     }
 
     @Test
-    public void testGetAllUniversites() {
+    void testGetInvalidUniversite() {
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class,
+                () -> universiteRepository.findById(1).get());
 
-    }
-
-    @Test
-    public void testGetInvaliduniversite() {
-        Exception exception = assertThrows(NoSuchElementException.class, () -> {
-            universiteRepository.findById(1).get();
-        });
-        Assertions.assertThat(exception).isNotNull();
-        Assertions.assertThat(exception.getClass()).isEqualTo(NoSuchElementException.class);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("No value present");
+        Assertions.assertThat(exception)
+                .isNotNull()
+                .isInstanceOf(NoSuchElementException.class)
+                .hasMessage("No value present");
     }
 
 
 
+
     @Test
-    public void testDeleteUniversite() {
+    void testDeleteUniversite() {
         Universite saved = new Universite(5, "ron");
         universiteRepository.save(saved);
         universiteRepository.delete(saved);
-        Exception exception = assertThrows(NoSuchElementException.class, () -> {
-            universiteRepository.findById(5).get();
-        });
+
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> universiteRepository.findById(5).get());
+
         Assertions.assertThat(exception).isNotNull();
         Assertions.assertThat(exception.getClass()).isEqualTo(NoSuchElementException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("No value present");
     }
+
 }
