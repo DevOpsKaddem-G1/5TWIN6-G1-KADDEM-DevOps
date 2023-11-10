@@ -7,14 +7,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.kaddem.entities.Universite;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/universite")
 public class UniversiteRestController {
 
+    private final UniversiteServiceImpl universiteService;
+
     @Autowired
-    UniversiteServiceImpl universiteService;
+    public UniversiteRestController(UniversiteServiceImpl universiteService) {
+        this.universiteService = universiteService;
+    }
 
     // http://localhost:8089/Kaddem/universite/retrieve-all-universites
     @GetMapping("/retrieve-all-universites")
@@ -22,7 +27,6 @@ public class UniversiteRestController {
     public List<Universite> getUniversites() {
         return universiteService.retrieveAllUniversites();
     }
-
 
     // http://localhost:8089/Kaddem/universite/retrieve-universite/8
     @GetMapping("/retrieve-universite/{universite-id}")
@@ -65,5 +69,4 @@ public class UniversiteRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // 500 Internal Server Error
         }
     }
-
 }
