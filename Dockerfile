@@ -6,4 +6,4 @@ RUN wget -O /app/5TWIN6-G1-Kaddem-0.0.1.jar http://192.168.33.10:8081/repository
 
 WORKDIR /app
 
-CMD ["java", "-jar", "5TWIN6-G1-Kaddem-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "5TWIN6-G1-Kaddem-0.0.1.jar"]
