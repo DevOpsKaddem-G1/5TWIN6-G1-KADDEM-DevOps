@@ -15,7 +15,7 @@ services:
     depends_on:
       - khaddemApp
 
-  dbmysql:
+  khaddemApp:
     image: "mysql:5.6"
     container_name: khaddemApp
     environment:
