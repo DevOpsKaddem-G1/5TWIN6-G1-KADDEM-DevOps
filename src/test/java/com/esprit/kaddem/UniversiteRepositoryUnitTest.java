@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
-public class UniversiteRepositoryUnitTest {
+class UniversiteRepositoryUnitTest {
 
     @Mock
     UniversiteRepository universiteRepository;
@@ -50,17 +50,21 @@ public class UniversiteRepositoryUnitTest {
 
 
 
+
     @Test
     void testDeleteUniversite() {
         Universite saved = new Universite(5, "ron");
         universiteRepository.save(saved);
         universiteRepository.delete(saved);
 
-        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> universiteRepository.findById(5).get());
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class,
+                () -> universiteRepository.findById(5).get());
 
-        Assertions.assertThat(exception).isNotNull();
-        Assertions.assertThat(exception.getClass()).isEqualTo(NoSuchElementException.class);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("No value present");
+        Assertions.assertThat(exception)
+                .isNotNull()
+                .isInstanceOf(NoSuchElementException.class)
+                .hasMessage("No value present");
     }
+
 
 }
