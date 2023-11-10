@@ -1,14 +1,14 @@
 version: "3.7"
 services:
-  Kaddem:
-    container_name: Kaddem
+  backend:
+    container_name: backend
     build: ../5TWIN6-G1-KADDEM-DevOps
     ports:
-      - "8085:8085"
+      - "8089:8089"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://dbmysql:3306/kaddemApp?createDatabaseIfNotExist=true&userSSL=false
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/khaddemApp?useUnicode=true&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_PASSWORD=
     restart: unless-stopped
 
     image: amalmelki/kaddem-backend:latest
