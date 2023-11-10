@@ -39,13 +39,14 @@ class UniversiteRepositoryUnitTest {
     @Test
     void testGetInvalidUniversite() {
         NoSuchElementException exception = assertThrows(NoSuchElementException.class,
-                () -> universiteRepository.findById(1).get());
+                () -> universiteRepository.findById(1).orElseThrow());
 
         Assertions.assertThat(exception)
                 .isNotNull()
                 .isInstanceOf(NoSuchElementException.class)
                 .hasMessage("No value present");
     }
+
 
 
 
@@ -55,16 +56,19 @@ class UniversiteRepositoryUnitTest {
     void testDeleteUniversite() {
         Universite saved = new Universite(5, "ron");
         universiteRepository.save(saved);
-        universiteRepository.delete(saved);
 
         NoSuchElementException exception = assertThrows(NoSuchElementException.class,
-                () -> universiteRepository.findById(5).get());
+                () -> {
+                    Universite deletedUniversite = universiteRepository.findById(5).orElseThrow();
+                    universiteRepository.delete(deletedUniversite);
+                });
 
         Assertions.assertThat(exception)
                 .isNotNull()
                 .isInstanceOf(NoSuchElementException.class)
                 .hasMessage("No value present");
     }
+
 
 
 }
