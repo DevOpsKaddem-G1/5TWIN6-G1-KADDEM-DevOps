@@ -15,6 +15,17 @@ services:
     depends_on:
       - khaddemApp
 
+  frontend:
+    container_name: frontend
+    build: ../5TWIN6-G1-KADDEM-DevOps_FrontEndAngular
+    ports:
+      - "80:80"
+    restart: unless-stopped
+
+    image: amalmelki/kaddem-frontend:latest
+    depends_on:
+      - backend
+
   khaddemApp:
     image: "mysql:5.6"
     container_name: khaddemApp
