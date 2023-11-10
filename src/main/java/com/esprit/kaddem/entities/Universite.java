@@ -31,10 +31,6 @@ public class Universite implements Serializable {
         return idUniversite;
     }
 
-    public void setIdUniversite(Integer idUniversite) {
-        this.idUniversite = idUniversite;
-    }
-
     public String getNomUniv() {
         return nomUniv;
     }

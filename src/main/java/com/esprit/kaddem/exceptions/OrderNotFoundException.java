@@ -5,7 +5,4 @@ public class OrderNotFoundException extends RuntimeException {
         super(s);
     }
 
-    public OrderNotFoundException(String s, Throwable throwable) {
-        super(s, throwable);
-    }
 }

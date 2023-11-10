@@ -55,8 +55,6 @@ class UniversiteServiceUnitTest {
         assertEquals("george", universiteById.getNomUniv());
     }
 
-
-
     @Test
     void testGetInvaliduniversiteById() {
         when(universiteRepository.findById(17)).thenThrow(new OrderNotFoundException("Universite Not Found with ID"));

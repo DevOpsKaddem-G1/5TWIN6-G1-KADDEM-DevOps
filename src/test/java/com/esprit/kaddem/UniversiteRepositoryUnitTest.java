@@ -38,7 +38,7 @@ public class UniversiteRepositoryUnitTest {
 
     @Test
     public void testGetAllUniversites() {
-        
+
     }
 
     @Test
