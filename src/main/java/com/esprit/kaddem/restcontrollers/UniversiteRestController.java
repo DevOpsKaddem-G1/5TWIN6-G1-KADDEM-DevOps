@@ -60,13 +60,13 @@ public class UniversiteRestController {
         return universiteService.updateUniversite(universite);
     }
 
-//    @DeleteMapping("/delete-universite/{universite-id}")
-//    public ResponseEntity<Void> deleteUniversite(@PathVariable("universite-id") Integer universiteId) {
-//        try {
-//            universiteService.deleteUniversite(universiteId);
-//            return ResponseEntity.ok().build(); // 200 OK
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // 500 Internal Server Error
-//        }
-//    }
+    @DeleteMapping("/delete-universite/{universite-id}")
+    public ResponseEntity<Void> deleteUniversite(@PathVariable("universite-id") Integer universiteId) {
+        try {
+            universiteService.deleteUniversite(universiteId);
+            return ResponseEntity.ok().build(); // 200 OK
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // 500 Internal Server Error
+        }
+    }
 }

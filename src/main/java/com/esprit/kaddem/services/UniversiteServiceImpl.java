@@ -41,7 +41,7 @@ public class UniversiteServiceImpl implements IUniversiteService {
         }
     }
 
-//    public void deleteUniversite(Integer idUniversite) {
-//        universiteRepository.delete(retrieveUniversite(idUniversite));
-//    }
+    public void deleteUniversite(Integer idUniversite) {
+        universiteRepository.delete(retrieveUniversite(idUniversite));
+    }
 }
