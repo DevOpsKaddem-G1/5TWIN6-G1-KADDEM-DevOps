@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/universite")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class UniversiteRestController {
 
     private final UniversiteServiceImpl universiteService;

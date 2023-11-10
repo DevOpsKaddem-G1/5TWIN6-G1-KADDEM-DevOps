@@ -58,14 +58,16 @@ class UniversiteRepositoryUnitTest {
         universiteRepository.save(saved);
 
         NoSuchElementException exception = assertThrows(NoSuchElementException.class,
-                () -> universiteRepository.findById(5).ifPresent(universiteRepository::delete));
+                () -> {
+                    Universite deletedUniversite = universiteRepository.findById(5).orElseThrow();
+                    universiteRepository.delete(deletedUniversite);
+                });
 
         Assertions.assertThat(exception)
                 .isNotNull()
                 .isInstanceOf(NoSuchElementException.class)
                 .hasMessage("No value present");
     }
-
 
 
 
