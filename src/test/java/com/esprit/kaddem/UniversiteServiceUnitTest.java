@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-public class UniversiteServiceUnitTest {
+class UniversiteServiceUnitTest {
 
     @Mock
     UniversiteRepository universiteRepository;
@@ -35,7 +35,7 @@ public class UniversiteServiceUnitTest {
     }
 
     @Test
-    public void testGetUniveristesList() {
+    void testGetUniveristesList() {
         Universite universite1 = new Universite(9, "ben");
         Universite universite2 = new Universite(8, "kevin");
         when(universiteRepository.findAll()).thenReturn(Arrays.asList(universite1, universite2));
@@ -47,7 +47,7 @@ public class UniversiteServiceUnitTest {
 
 
     @Test
-    public void testGetUniveristeById() {
+    void testGetUniveristeById() {
         Universite universite = new Universite(10, "george");
         when(universiteRepository.findById(10)).thenReturn(Optional.of(universite));
         Universite universiteById = iUniversiteService.retrieveUniversite(10);
@@ -58,7 +58,7 @@ public class UniversiteServiceUnitTest {
 
 
     @Test
-    public void testGetInvaliduniversiteById() {
+    void testGetInvaliduniversiteById() {
         when(universiteRepository.findById(17)).thenThrow(new OrderNotFoundException("Universite Not Found with ID"));
         Exception exception = assertThrows(OrderNotFoundException.class, () -> {
             iUniversiteService.retrieveUniversite(17);
@@ -67,7 +67,7 @@ public class UniversiteServiceUnitTest {
     }
 
     @Test
-    public void testCreateUniversite() {
+    void testCreateUniversite() {
         Universite universite = new Universite(12, "john");
         iUniversiteService.addUniversite(universite);
         verify(universiteRepository, times(1)).save(universite);
