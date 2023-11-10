@@ -32,8 +32,6 @@ public class KaddemApplication {
 			universiteRepository.save(new Universite(8, "Université Cosmique des Étoiles"));
 			universiteRepository.save(new Universite(9, "Université Polytechnique du Futur"));
 			universiteRepository.save(new Universite(10, "Université Écologique Verte"));
-			// fetch
-			// universiteRepository.findAll().forEach(System.out::println);
 		};
 	}
 }
