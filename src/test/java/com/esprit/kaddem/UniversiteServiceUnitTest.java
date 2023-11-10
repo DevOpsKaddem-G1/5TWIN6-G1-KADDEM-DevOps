@@ -40,19 +40,21 @@ public class UniversiteServiceUnitTest {
         Universite universite2 = new Universite(8, "kevin");
         when(universiteRepository.findAll()).thenReturn(Arrays.asList(universite1, universite2));
         List<Universite> universiteList = iUniversiteService.retrieveAllUniversites();
-        assertEquals(universiteList.size(), 2);
-        assertEquals(universiteList.get(0).getNomUniv(), "ben");
-        assertEquals(universiteList.get(1).getNomUniv(), "kevin");
+        assertEquals(2, universiteList.size());
+        assertEquals("ben", universiteList.get(0).getNomUniv());
+        assertEquals("kevin", universiteList.get(1).getNomUniv());
     }
+
 
     @Test
     public void testGetUniveristeById() {
         Universite universite = new Universite(10, "george");
         when(universiteRepository.findById(10)).thenReturn(Optional.of(universite));
         Universite universiteById = iUniversiteService.retrieveUniversite(10);
-        assertNotEquals(universiteById, null);
-        assertEquals(universiteById.getNomUniv(), "george");
+        assertNotEquals(null, universiteById);
+        assertEquals("george", universiteById.getNomUniv());
     }
+
 
 
     @Test
