@@ -1,9 +1,7 @@
 package com.esprit.kaddem;
 
 import com.esprit.kaddem.entities.Universite;
-import com.esprit.kaddem.exceptions.OrderNotFoundException;
 import com.esprit.kaddem.repositories.UniversiteRepository;
-import com.esprit.kaddem.services.IUniversiteService;
 import com.esprit.kaddem.services.UniversiteServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,13 +54,16 @@ class UniversiteServiceUnitTest {
     }
 
     @Test
-    void testGetInvaliduniversiteById() {
-        when(universiteRepository.findById(17)).thenThrow(new OrderNotFoundException("Universite Not Found with ID"));
-        Exception exception = assertThrows(OrderNotFoundException.class, () -> {
+    void testGetInvalidUniversiteById() {
+        when(universiteRepository.findById(17)).thenThrow(new RuntimeException("Universite Not Found with ID"));
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             iUniversiteService.retrieveUniversite(17);
         });
+
         assertTrue(exception.getMessage().contains("Universite Not Found with ID"));
     }
+
 
     @Test
     void testCreateUniversite() {
