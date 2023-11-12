@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DepartementServiceImpl implements IDepartementService{
+public class DepartementServiceImpl implements IDepartementService {
     private final DepartementRepository departementRepository;
     private final UniversiteRepository universiteRepository;
 
@@ -31,9 +31,9 @@ public class DepartementServiceImpl implements IDepartementService{
         Departement departement = new Departement();
         departement.setNomDepart(d.getName());
 
-        departementRepository.save(departement);
-        return departement;
+        return departementRepository.save(departement);
     }
+
 
 
     @Override
