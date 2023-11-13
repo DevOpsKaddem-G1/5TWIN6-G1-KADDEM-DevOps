@@ -16,13 +16,12 @@ import java.util.List;
 public class UniversiteRestController {
 
     private final UniversiteServiceImpl universiteService;
+    private final UniversiteRepository universiteRepository;
 
     @Autowired
-    private UniversiteRepository universiteRepository;
-
-    @Autowired
-    public UniversiteRestController(UniversiteServiceImpl universiteService) {
+    public UniversiteRestController(UniversiteServiceImpl universiteService, UniversiteRepository universiteRepository) {
         this.universiteService = universiteService;
+        this.universiteRepository = universiteRepository;
     }
 
     // http://localhost:8089/Kaddem/universite/retrieve-all-universites

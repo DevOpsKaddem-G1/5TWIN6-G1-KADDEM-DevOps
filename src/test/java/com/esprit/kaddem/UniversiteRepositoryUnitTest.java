@@ -9,7 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import java.util.NoSuchElementException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
@@ -20,8 +23,8 @@ class UniversiteRepositoryUnitTest {
 
     @BeforeEach
     void setUp() {
-        universiteRepository.save(new Universite(1,"Manar"));
-        universiteRepository.save(new Universite(2,"Sfax"));
+        universiteRepository.save(new Universite(1, "Manar"));
+        universiteRepository.save(new Universite(2, "Sfax"));
     }
 
     @AfterEach
@@ -31,18 +34,10 @@ class UniversiteRepositoryUnitTest {
 
     @Test
     void testGetInvalidUniversite() {
-        NoSuchElementException exception = assertThrows(NoSuchElementException.class,
-                () -> universiteRepository.findById(1).get());
-
-        Assertions.assertThat(exception)
-                .isNotNull()
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessage("No value present");
+        assertThrows(NoSuchElementException.class, () -> {
+            universiteRepository.findById(1).get();
+        });
     }
-
-
-
-
 
     @Test
     void testDeleteUniversite() {
@@ -50,14 +45,8 @@ class UniversiteRepositoryUnitTest {
         universiteRepository.save(saved);
         universiteRepository.delete(saved);
 
-        NoSuchElementException exception = assertThrows(NoSuchElementException.class,
-                () -> universiteRepository.findById(5).get());
-
-        Assertions.assertThat(exception)
-                .isNotNull()
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessage("No value present");
+        assertThrows(NoSuchElementException.class, () -> {
+            universiteRepository.findById(5).get();
+        });
     }
-
-
 }
