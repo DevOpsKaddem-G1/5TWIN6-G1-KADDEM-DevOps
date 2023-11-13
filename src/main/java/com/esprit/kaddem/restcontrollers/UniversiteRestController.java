@@ -1,5 +1,6 @@
 package com.esprit.kaddem.restcontrollers;
 
+import com.esprit.kaddem.repositories.UniversiteRepository;
 import com.esprit.kaddem.restcontrollers.dtos.UniversiteDTO;
 import com.esprit.kaddem.services.UniversiteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import java.util.List;
 public class UniversiteRestController {
 
     private final UniversiteServiceImpl universiteService;
+
+    @Autowired
+    private UniversiteRepository universiteRepository;
 
     @Autowired
     public UniversiteRestController(UniversiteServiceImpl universiteService) {
@@ -38,16 +42,17 @@ public class UniversiteRestController {
     // http://localhost:8089/Kaddem/universite/add-universite
     @PostMapping("/add-universite")
     @ResponseBody
-    public UniversiteDTO addUniversite(@RequestBody UniversiteDTO universiteDTO) {
+    public ResponseEntity<UniversiteDTO> addUniversite(@RequestBody UniversiteDTO universiteDTO) {
         Universite universite = new Universite();
         universite.setNomUniv(universiteDTO.getNomUniv());
 
-        // Utilisez le service pour ajouter l'entité Universite
+        // Utilize the service to add the Universite entity
+        universite = universiteRepository.save(universite);
 
         UniversiteDTO responseDTO = new UniversiteDTO();
         responseDTO.setNomUniv(universite.getNomUniv());
 
-        return responseDTO;
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
     // http://localhost:8089/Kaddem/universite/update-universite
