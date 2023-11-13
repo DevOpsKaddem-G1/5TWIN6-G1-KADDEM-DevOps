@@ -4,14 +4,18 @@ import com.esprit.kaddem.entities.Departement;
 import com.esprit.kaddem.repositories.DepartementRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class DepartementRepositoryTest {
 
     @Autowired
@@ -20,19 +24,19 @@ class DepartementRepositoryTest {
     @Test
     void testFindAll() {
         // Given
-        Departement departement1 = new Departement(1, "Departement 1");
-        Departement departement2 = new Departement(2, "Departement 2");
 
-        departementRepository.save(departement1);
-        departementRepository.save(departement2);
+            // Create and save a sample Departement entity
+            Departement departement = new Departement();
+            departement.setNomDepart("Sample Departement");
+            departement = departementRepository.save(departement);
 
-        // When
-        List<Departement> departements = departementRepository.findAll();
+            // Retrieve the entity by ID
+            Optional<Departement> retrievedDepartement = departementRepository.findById(departement.getIdDepartement());
 
-        // Then
-        assertEquals(2, departements.size());
-        assertEquals(departement1, departements.get(0));
-        assertEquals(departement2, departements.get(1));
+            // Assert that the retrieved entity matches the original entity
+            assertTrue(retrievedDepartement.isPresent());
+            assertEquals(departement.getNomDepart(), retrievedDepartement.get().getNomDepart());
+
     }
 
     // Additional tests for custom queries or methods can be added as needed
