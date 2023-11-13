@@ -2,14 +2,18 @@ package com.esprit.kaddem.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.esprit.kaddem.entities.Contrat;
+import com.esprit.kaddem.entities.Departement;
 import com.esprit.kaddem.entities.Etudiant;
 import com.esprit.kaddem.entities.Specialite;
 import com.esprit.kaddem.repositories.ContratRepository;
 import com.esprit.kaddem.repositories.EtudiantRepository;
+import com.esprit.kaddem.restcontrollers.dtos.ContratDTO;
 
 import javax.transaction.Transactional;
 import java.util.Date;
@@ -30,12 +34,23 @@ public class ContratServiceImpl implements IContratService {
         return contratRepository.findAll();
     }
 
-    @Override
-    public Contrat updateContrat(Contrat ce) {
-        log.info("debut methode updateContrat");
-        contratRepository.save(ce);
-        return ce;
-    }
+@Override
+public Contrat updateContrat(ContratDTO c) {
+    log.info("debut methode updateContrat");
+
+    Optional<Contrat> optionalContrat = contratRepository.findById(c.getId());
+
+        Contrat existingContrat = optionalContrat.get();
+
+        existingContrat.setDateDebutContrat(c.getDateDebutContrat());
+        existingContrat.setDateFinContrat(c.getDateFinContrat());
+        existingContrat.setSpecialite(c.getSpecialite());
+        contratRepository.save(existingContrat);
+
+        return existingContrat;
+ 
+}
+
 
     @Override
     public Contrat retrieveContrat(Integer idContrat) {
@@ -53,12 +68,17 @@ public class ContratServiceImpl implements IContratService {
     }
 
     @Override
-    public Contrat addContrat(Contrat c) {
+    public Contrat addContrat(ContratDTO c) {
         // start date t1
-        contratRepository.save(c);
+
+        Contrat contrat = new Contrat();
+        contrat.setDateDebutContrat(c.getDateDebutContrat());
+        contrat.setDateFinContrat(c.getDateFinContrat());
+        contrat.setSpecialite(c.getSpecialite());
+        contratRepository.save(contrat);
 
         // te =t2-t1;
-        return c;
+        return contrat;
     }
 
     @Transactional

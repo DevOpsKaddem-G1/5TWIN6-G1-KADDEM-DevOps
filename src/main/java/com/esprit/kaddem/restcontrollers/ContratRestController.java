@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import com.esprit.kaddem.entities.Contrat;
+import com.esprit.kaddem.restcontrollers.dtos.ContratDTO;
 import com.esprit.kaddem.services.IContratService;
 
 import java.util.Date;
@@ -36,7 +37,7 @@ public class ContratRestController {
     // http://localhost:8089/Kaddem/contrat/add-contrat
     @PostMapping("/add-contrat")
     @ResponseBody
-    public Contrat addContrat(@RequestBody Contrat c) {
+    public Contrat addContrat(@RequestBody ContratDTO c) {
         Contrat contrat = contratService.addContrat(c);
         return contrat;
     }
@@ -44,7 +45,7 @@ public class ContratRestController {
     // http://localhost:8089/Kaddem/contrat/update-contrat
     @PutMapping("/update-contrat")
     @ResponseBody
-    public Contrat updateEtudiant(@RequestBody Contrat cont) {
+    public Contrat updateEtudiant(@RequestBody ContratDTO cont) {
         Contrat c = contratService.updateContrat(cont);
         return c;
     }
