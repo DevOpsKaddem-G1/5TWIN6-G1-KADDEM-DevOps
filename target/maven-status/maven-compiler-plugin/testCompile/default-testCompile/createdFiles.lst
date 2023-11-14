@@ -1,0 +1,4 @@
+com\esprit\kaddem\UniversiteRestControllerTest.class
+com\esprit\kaddem\UniversiteServiceUnitTest.class
+com\esprit\kaddem\UniversiteRepositoryUnitTest.class
+com\esprit\kaddem\KaddemApplicationTests.class
