@@ -29,16 +29,6 @@ public class UniversiteRestController {
     @GetMapping("/retrieve-all-universites")
     @ResponseBody
     public List<Universite> getUniversites() {
-        universiteRepository.save(new Universite(1, "Université de Technologie Innovante"));
-        universiteRepository.save(new Universite(3, "Ibn Khaldûn (1332-1406)"));
-        universiteRepository.save(new Universite(4, "Université Internationale des Sciences"));
-        universiteRepository.save(new Universite(2, "Université des Arts Créatifs"));
-        universiteRepository.save(new Universite(5, "Université de Recherche Avancée"));
-        universiteRepository.save(new Universite(6, "Université Mondiale de la Paix"));
-        universiteRepository.save(new Universite(7, "Université Numérique Avancée"));
-        universiteRepository.save(new Universite(8, "Université Cosmique des Étoiles"));
-        universiteRepository.save(new Universite(9, "Université Polytechnique du Futur"));
-        universiteRepository.save(new Universite(10, "Université Écologique Verte"));
         return universiteService.retrieveAllUniversites();
     }
 
