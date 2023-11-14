@@ -41,64 +41,66 @@ import static org.mockito.Mockito.*;
     }
 
 
-//    @Test
-//    void testGetAllUniversites() {
-//        // Mock data
-//        Universite universite1 = new Universite(1, "Universite1");
-//        Universite universite2 = new Universite(2, "Universite2");
-//        List<Universite> universiteList = Arrays.asList(universite1, universite2);
-//
-//        // Mocking behavior
-//        when(universiteService.retrieveAllUniversites()).thenReturn(universiteList);
-//
-//        // Perform the test
-//        List<Universite> result = universiteController.getUniversites();
-//
-//        // Verify the interactions
-//        verify(universiteService, times(1)).retrieveAllUniversites();
-//
-//        // Assertions
-//        assertEquals(2, result.size());
-//    }
+    @Test
+    void testGetAllUniversites() {
+        // Mock data
+        Universite universite1 = new Universite(1, "Universite1");
+        Universite universite2 = new Universite(2, "Universite2");
+        List<Universite> universiteList = Arrays.asList(universite1, universite2);
 
-//    @Test
-//    void testGetUniversiteById() {
-//        // Mock data
-//        Universite universite = new Universite(1, "Universite1");
-//
-//        // Mocking behavior
-//        when(universiteService.retrieveUniversite(1)).thenReturn(universite);
-//
-//        // Perform the test
-//        ResponseEntity<Universite> responseEntity = universiteController.retrieveUniversite(1);
-//
-//        // Verify the interactions
-//        verify(universiteService, times(1)).retrieveUniversite(1);
-//
-//        // Assertions
-//        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-//        assertEquals(universite, responseEntity.getBody());
-//    }
-//
-//    @Test
-//    void testAddUniversite() {
-//        // Mock data
-//        UniversiteDTO universiteDTO = new UniversiteDTO();
-//        universiteDTO.setNomUniv("Universite1");
-//
-//        // Mocking behavior
-//        when(universiteService.addUniversite(any(Universite.class))).thenReturn(new Universite());
-//
-//        // Perform the test
-//        ResponseEntity<Universite> responseEntity = universiteController.addUniversite(universiteDTO);
-//
-//        // Verify the interactions
-//        verify(universiteService, times(1)).addUniversite(any(Universite.class));
-//
-//        // Assertions
-//        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
-//        assertNotNull(responseEntity.getBody());
-//    }
+        // Mocking behavior
+        when(universiteService.retrieveAllUniversites()).thenReturn(universiteList);
+
+        // Perform the test
+        List<Universite> result = universiteController.getUniversites();
+
+        // Verify the interactions
+        verify(universiteService, times(1)).retrieveAllUniversites();
+
+        // Assertions
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    void testGetUniversiteById() {
+        // Mock data
+        Universite universite = new Universite(1, "Universite1");
+
+        // Mocking behavior
+        when(universiteService.retrieveUniversite(1)).thenReturn(universite);
+
+        // Perform the test
+        ResponseEntity<Universite> responseEntity = universiteController.retrieveUniversite(1);
+
+        // Verify the interactions
+        verify(universiteService, times(1)).retrieveUniversite(1);
+
+        // Assertions
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());  // Vérifiez le statut HTTP ici
+        assertEquals(universite, responseEntity.getBody());
+    }
+
+
+    @Test
+    void testAddUniversite() {
+        // Mock data
+        UniversiteDTO universiteDTO = new UniversiteDTO();
+        universiteDTO.setNomUniv("Universite1");
+
+        // Mocking behavior
+        when(universiteService.addUniversite(any(Universite.class))).thenReturn(new Universite());
+
+        // Perform the test
+        ResponseEntity<Universite> responseEntity = universiteController.addUniversite(universiteDTO);
+
+        // Verify the interactions
+        verify(universiteService, times(1)).addUniversite(any(Universite.class));
+
+        // Assertions
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+        assertNotNull(responseEntity.getBody());
+    }
+
 //
 //    @Test
 //    void testUpdateUniversite() {

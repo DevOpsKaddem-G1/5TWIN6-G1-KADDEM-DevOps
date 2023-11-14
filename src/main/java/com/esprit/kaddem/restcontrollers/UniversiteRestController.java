@@ -33,26 +33,29 @@ public class UniversiteRestController {
     }
 
     // http://localhost:8089/Kaddem/universite/retrieve-universite/8
-    @GetMapping("/retrieve-universite/{universite-id}")
-    @ResponseBody
-    public Universite retrieveUniversite(@PathVariable("universite-id") Integer universiteId) {
-        return universiteService.retrieveUniversite(universiteId);
+    @GetMapping("/universites/{id}")
+    public ResponseEntity<Universite> retrieveUniversite(@PathVariable int id) {
+        Universite universite = universiteService.retrieveUniversite(id);
+        return ResponseEntity.ok(universite); // Utilisez le statut approprié ici
     }
 
+
     // http://localhost:8089/Kaddem/universite/add-universite
-    @PostMapping("/add-universite")
-    @ResponseBody
-    public ResponseEntity<UniversiteDTO> addUniversite(@RequestBody UniversiteDTO universiteDTO) {
+    @PostMapping
+    public ResponseEntity<Universite> addUniversite(@RequestBody UniversiteDTO universiteDTO) {
+        Universite universite = convertDTOToUniversite(universiteDTO);
+
+        Universite addedUniversite = universiteService.addUniversite(universite);
+
+        return new ResponseEntity<>(addedUniversite, HttpStatus.CREATED);
+    }
+
+    private Universite convertDTOToUniversite(UniversiteDTO universiteDTO) {
         Universite universite = new Universite();
         universite.setNomUniv(universiteDTO.getNomUniv());
+        // Ajoutez d'autres champs en fonction de votre modèle Universite
 
-        // Utilize the service to add the Universite entity
-        universite = universiteRepository.save(universite);
-
-        UniversiteDTO responseDTO = new UniversiteDTO();
-        responseDTO.setNomUniv(universite.getNomUniv());
-
-        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+        return universite;
     }
 
     // http://localhost:8089/Kaddem/universite/update-universite

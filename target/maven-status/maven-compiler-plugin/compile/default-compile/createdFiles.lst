@@ -1,8 +1,0 @@
-com\esprit\kaddem\KaddemApplication.class
-com\esprit\kaddem\restcontrollers\UniversiteRestController.class
-com\esprit\kaddem\entities\Universite.class
-com\esprit\kaddem\repositories\UniversiteRepository.class
-com\esprit\kaddem\services\UniversiteServiceImpl.class
-com\esprit\kaddem\CorsConfig.class
-com\esprit\kaddem\restcontrollers\dtos\UniversiteDTO.class
-com\esprit\kaddem\services\IUniversiteService.class
