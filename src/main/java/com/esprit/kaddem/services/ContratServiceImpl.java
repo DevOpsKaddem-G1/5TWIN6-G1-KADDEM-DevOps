@@ -152,7 +152,7 @@ public class ContratServiceImpl implements IContratService {
     public float getChiffreAffaireEntreDeuxDates(Date startDate, Date endDate) {
         float differenceInTime = (float) (endDate.getTime() - startDate.getTime());
         float differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
-        float difference_In_months = differenceInDays / 30;
+        float differenceInMonths = differenceInDays / 30;
         List<Contrat> contrats = contratRepository.findAll();
         float chiffreAffaireEntreDeuxDates = 0;
         float chiffreAffaireEntreDeuxDatesIA = 0;
@@ -162,19 +162,19 @@ public class ContratServiceImpl implements IContratService {
 
         for (Contrat contrat : contrats) {
             if (contrat.getSpecialite() == Specialite.IA) {
-                chiffreAffaireEntreDeuxDates += (difference_In_months * contrat.getMontantContrat());
-                chiffreAffaireEntreDeuxDatesIA += (difference_In_months * contrat.getMontantContrat());
+                chiffreAffaireEntreDeuxDates += (differenceInMonths * contrat.getMontantContrat());
+                chiffreAffaireEntreDeuxDatesIA += (differenceInMonths * contrat.getMontantContrat());
 
             } else if (contrat.getSpecialite() == Specialite.CLOUD) {
-                chiffreAffaireEntreDeuxDates += (difference_In_months * contrat.getMontantContrat());
-                chiffreAffaireEntreDeuxDatesCloud += (difference_In_months * contrat.getMontantContrat());
+                chiffreAffaireEntreDeuxDates += (differenceInMonths * contrat.getMontantContrat());
+                chiffreAffaireEntreDeuxDatesCloud += (differenceInMonths * contrat.getMontantContrat());
             } else if (contrat.getSpecialite() == Specialite.RESEAU) {
-                chiffreAffaireEntreDeuxDates += (difference_In_months * contrat.getMontantContrat());
-                chiffreAffaireEntreDeuxDatesReseau += (difference_In_months * contrat.getMontantContrat());
+                chiffreAffaireEntreDeuxDates += (differenceInMonths * contrat.getMontantContrat());
+                chiffreAffaireEntreDeuxDatesReseau += (differenceInMonths * contrat.getMontantContrat());
 
             } else if (contrat.getSpecialite() == Specialite.SECURITE) {
-                chiffreAffaireEntreDeuxDates += (difference_In_months * contrat.getMontantContrat());
-                chiffreAffaireEntreDeuxDatesSecurite += (difference_In_months * contrat.getMontantContrat());
+                chiffreAffaireEntreDeuxDates += (differenceInMonths * contrat.getMontantContrat());
+                chiffreAffaireEntreDeuxDatesSecurite += (differenceInMonths * contrat.getMontantContrat());
 
             }
         }

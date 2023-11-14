@@ -1,7 +1,9 @@
 package com.esprit.kaddem.restcontrollers.dtos;
+
 import java.util.Date;
 
 import com.esprit.kaddem.entities.Specialite;
+
 public class ContratDTO {
 
     private Integer id;
@@ -13,6 +15,7 @@ public class ContratDTO {
     // Add a comment here to explain why this method is empty.
 
     public ContratDTO() {
+        // An empty constructor is provided for frameworks or libraries that require it.
     }
 
     public Integer getId() {
