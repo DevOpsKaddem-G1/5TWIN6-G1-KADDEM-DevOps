@@ -15,7 +15,8 @@ import java.util.List;
 @RequestMapping("/universite")
 public class UniversiteRestController {
 
-    private final UniversiteServiceImpl universiteService;
+    @Autowired
+    private UniversiteServiceImpl universiteService;
     private final UniversiteRepository universiteRepository;
 
     @Autowired
