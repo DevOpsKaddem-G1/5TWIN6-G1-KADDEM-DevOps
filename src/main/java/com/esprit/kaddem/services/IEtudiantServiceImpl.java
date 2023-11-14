@@ -15,9 +15,10 @@ import java.util.Optional;
 @Service
 @Slf4j
 @AllArgsConstructor
-public class IEtudiantServiceImpl implements IEtudiantService{
+public class IEtudiantServiceImpl implements IEtudiantService {
 
     EtudiantRepository etudiantRepository;
+
     @Override
     public List<Etudiant> retrieveAllEtudiants() {
         return etudiantRepository.findAll();
@@ -43,24 +44,26 @@ public class IEtudiantServiceImpl implements IEtudiantService{
 
     @Override
     public Etudiant retrieveEtudiant(Integer idEtudiant) {
-        Optional<Etudiant> etudiantOptional =  etudiantRepository.findById(idEtudiant);
+        Optional<Etudiant> etudiantOptional = etudiantRepository.findById(idEtudiant);
         if (etudiantOptional.isPresent()) {
             return etudiantOptional.get();
         } else {
-            // Handle the case where the value is not present, e.g., throw an exception or return a default value.
+            // Handle the case where the value is not present, e.g., throw an exception or
+            // return a default value.
             throw new EntityNotFoundException("Etudiant not found with id: " + idEtudiant);
         }
     }
 
     @Override
     public String removeEtudiant(Integer idEtudiant) {
-        if( etudiantRepository.findById(idEtudiant).isPresent()) {
+        if (etudiantRepository.findById(idEtudiant).isPresent()) {
             etudiantRepository.deleteById(idEtudiant);
             return "Etudiant deleted!";
-        }else {
+        } else {
             return "Etudiant not found with id: " + idEtudiant;
         }
     }
+
     private Etudiant mapToEtudiant(EtudiantDTO etudiantDTO) {
         Etudiant etudiant = new Etudiant();
         etudiant.setIdEtudiant(etudiantDTO.getIdEtudiant());

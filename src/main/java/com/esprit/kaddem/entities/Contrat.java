@@ -50,7 +50,7 @@ public class Contrat implements Serializable {
     }
 
     public Etudiant getEtudiant() {
-    return etudiant;
+        return etudiant;
     }
 
     public void setIdContrat(Integer idContrat) {
@@ -78,7 +78,7 @@ public class Contrat implements Serializable {
     }
 
     public void setEtudiant(Etudiant etudiant) {
-    this.etudiant = etudiant;
+        this.etudiant = etudiant;
     }
 
     public Contrat() {
@@ -97,7 +97,8 @@ public class Contrat implements Serializable {
                 '}';
     }
 
-    public Contrat(Integer idContrat, Date dateDebutContrat, Date dateFinContrat, Specialite specialite, Boolean archived, Integer montantContrat, Etudiant etudiant) {
+    public Contrat(Integer idContrat, Date dateDebutContrat, Date dateFinContrat, Specialite specialite,
+            Boolean archived, Integer montantContrat, Etudiant etudiant) {
         this.idContrat = idContrat;
         this.dateDebutContrat = dateDebutContrat;
         this.dateFinContrat = dateFinContrat;

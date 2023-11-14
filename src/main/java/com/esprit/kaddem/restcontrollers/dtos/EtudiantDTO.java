@@ -1,8 +1,9 @@
 package com.esprit.kaddem.restcontrollers.dtos;
+
 import com.esprit.kaddem.entities.Option;
 
 public class EtudiantDTO {
-    public EtudiantDTO( String prenomE, String nomE, Option op) {
+    public EtudiantDTO(String prenomE, String nomE, Option op) {
         this.prenomE = prenomE;
         this.nomE = nomE;
         this.op = op;
@@ -12,7 +13,6 @@ public class EtudiantDTO {
     private String prenomE;
     private String nomE;
     private Option op;
-
 
     public Integer getIdEtudiant() {
         return idEtudiant;

@@ -8,11 +8,11 @@ public interface IUnivService {
 
     List<Universite> retrieveAllUniversites();
 
-    Universite addUniversite (Universite u);
+    Universite addUniversite(Universite u);
 
-    Universite updateUniversite (Universite u);
+    Universite updateUniversite(Universite u);
 
-    Universite retrieveUniversite (Integer idUniversite);
+    Universite retrieveUniversite(Integer idUniversite);
 
-    void removeUniversite (Integer idUniversite);
+    void removeUniversite(Integer idUniversite);
 }

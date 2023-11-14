@@ -33,7 +33,6 @@ public class UniversiteServiceImpl implements IUniversiteService {
         return universiteRepository.save(universite);
     }
 
-
     public Universite retrieveUniversite(Integer idUniversite) {
         Optional<Universite> optionalUniversite = universiteRepository.findById(idUniversite);
 

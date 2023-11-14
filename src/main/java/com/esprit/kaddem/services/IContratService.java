@@ -8,15 +8,18 @@ import com.esprit.kaddem.restcontrollers.dtos.ContratDTO;
 
 public interface IContratService {
     List<Contrat> retrieveAllContrats();
+
     Contrat updateContrat(ContratDTO ce);
+
     Contrat retrieveContrat(Integer idContrat);
+
     void removeContrat(Integer idContrat);
+
     Contrat addContrat(ContratDTO c);
 
-    Contrat addAndAffectContratToEtudiant (ContratDTO ce, String nomE ,String prenomE );
+    Contrat addAndAffectContratToEtudiant(ContratDTO ce, String nomE, String prenomE);
 
-    public 	Integer nbContratsValides(Date startDate, Date endDate);
-
+    public Integer nbContratsValides(Date startDate, Date endDate);
 
     public float getChiffreAffaireEntreDeuxDates(Date startDate, Date endDate);
 

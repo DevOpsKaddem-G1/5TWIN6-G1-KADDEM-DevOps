@@ -34,33 +34,30 @@ public class ContratServiceImpl implements IContratService {
     @Override
     public Contrat updateContrat(ContratDTO c) {
         log.info("debut methode updateContrat");
-    
+
         Optional<Contrat> optionalContrat = contratRepository.findById(c.getId());
-    
+
         if (optionalContrat.isPresent()) {
             Contrat existingContrat = optionalContrat.get();
-    
+
             existingContrat.setDateDebutContrat(c.getDateDebutContrat());
             existingContrat.setDateFinContrat(c.getDateFinContrat());
             existingContrat.setSpecialite(c.getSpecialite());
             contratRepository.save(existingContrat);
-    
+
             return existingContrat;
         } else {
             return null;
         }
     }
-    
-
 
     @Override
     public Contrat retrieveContrat(Integer idContrat) {
         log.info("debut methode retrieveContrat");
         Optional<Contrat> optionalContrat = contratRepository.findById(idContrat);
-        
+
         return optionalContrat.orElse(new Contrat());
     }
-    
 
     @Override
     public void removeContrat(Integer idContrat) {
@@ -80,7 +77,7 @@ public class ContratServiceImpl implements IContratService {
 
     @Transactional
     public Contrat addAndAffectContratToEtudiant(ContratDTO c, String nomE, String prenomE) {
-          Contrat ce = new Contrat();
+        Contrat ce = new Contrat();
         ce.setDateDebutContrat(c.getDateDebutContrat());
         ce.setDateFinContrat(c.getDateFinContrat());
         ce.setSpecialite(c.getSpecialite());
