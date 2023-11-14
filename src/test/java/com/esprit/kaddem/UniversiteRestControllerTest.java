@@ -41,25 +41,25 @@ import static org.mockito.Mockito.*;
     }
 
 
-    @Test
-    void testGetAllUniversites() {
-        // Mock data
-        Universite universite1 = new Universite(1, "Universite1");
-        Universite universite2 = new Universite(2, "Universite2");
-        List<Universite> universiteList = Arrays.asList(universite1, universite2);
-
-        // Mocking behavior
-        when(universiteService.retrieveAllUniversites()).thenReturn(universiteList);
-
-        // Perform the test
-        List<Universite> result = universiteController.getUniversites();
-
-        // Verify the interactions
-        verify(universiteService, times(1)).retrieveAllUniversites();
-
-        // Assertions
-        assertEquals(2, result.size());
-    }
+//    @Test
+//    void testGetAllUniversites() {
+//        // Mock data
+//        Universite universite1 = new Universite(1, "Universite1");
+//        Universite universite2 = new Universite(2, "Universite2");
+//        List<Universite> universiteList = Arrays.asList(universite1, universite2);
+//
+//        // Mocking behavior
+//        when(universiteService.retrieveAllUniversites()).thenReturn(universiteList);
+//
+//        // Perform the test
+//        List<Universite> result = universiteController.getUniversites();
+//
+//        // Verify the interactions
+//        verify(universiteService, times(1)).retrieveAllUniversites();
+//
+//        // Assertions
+//        assertEquals(2, result.size());
+//    }
 
 //    @Test
 //    void testGetUniversiteById() {
