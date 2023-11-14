@@ -1,9 +1,7 @@
 package com.esprit.kaddem.restcontrollers.dtos;
-import java.io.Serializable;
 import java.util.Date;
 
 import com.esprit.kaddem.entities.Specialite;
-
 public class ContratDTO {
 
     private Integer id;
@@ -11,6 +9,8 @@ public class ContratDTO {
     private Date dateFinContrat;
     private Specialite specialite;
 
+    // Default constructor is intentionally left empty
+    // Add a comment here to explain why this method is empty.
 
     public ContratDTO() {
     }
@@ -18,6 +18,7 @@ public class ContratDTO {
     public Integer getId() {
         return id;
     }
+
     public Date getDateDebutContrat() {
         return dateDebutContrat;
     }
@@ -29,5 +30,4 @@ public class ContratDTO {
     public Specialite getSpecialite() {
         return specialite;
     }
-
 }

@@ -3,12 +3,9 @@ package com.esprit.kaddem.services;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.esprit.kaddem.entities.Contrat;
-import com.esprit.kaddem.entities.Departement;
 import com.esprit.kaddem.entities.Etudiant;
 import com.esprit.kaddem.entities.Specialite;
 import com.esprit.kaddem.repositories.ContratRepository;
@@ -34,22 +31,26 @@ public class ContratServiceImpl implements IContratService {
         return contratRepository.findAll();
     }
 
-@Override
-public Contrat updateContrat(ContratDTO c) {
-    log.info("debut methode updateContrat");
-
-    Optional<Contrat> optionalContrat = contratRepository.findById(c.getId());
-
-        Contrat existingContrat = optionalContrat.get();
-
-        existingContrat.setDateDebutContrat(c.getDateDebutContrat());
-        existingContrat.setDateFinContrat(c.getDateFinContrat());
-        existingContrat.setSpecialite(c.getSpecialite());
-        contratRepository.save(existingContrat);
-
-        return existingContrat;
- 
-}
+    @Override
+    public Contrat updateContrat(ContratDTO c) {
+        log.info("debut methode updateContrat");
+    
+        Optional<Contrat> optionalContrat = contratRepository.findById(c.getId());
+    
+        if (optionalContrat.isPresent()) {
+            Contrat existingContrat = optionalContrat.get();
+    
+            existingContrat.setDateDebutContrat(c.getDateDebutContrat());
+            existingContrat.setDateFinContrat(c.getDateFinContrat());
+            existingContrat.setSpecialite(c.getSpecialite());
+            contratRepository.save(existingContrat);
+    
+            return existingContrat;
+        } else {
+            return null;
+        }
+    }
+    
 
 
     @Override
@@ -69,26 +70,26 @@ public Contrat updateContrat(ContratDTO c) {
 
     @Override
     public Contrat addContrat(ContratDTO c) {
-        // start date t1
-
         Contrat contrat = new Contrat();
         contrat.setDateDebutContrat(c.getDateDebutContrat());
         contrat.setDateFinContrat(c.getDateFinContrat());
         contrat.setSpecialite(c.getSpecialite());
         contratRepository.save(contrat);
-
-        // te =t2-t1;
         return contrat;
     }
 
     @Transactional
-    public Contrat addAndAffectContratToEtudiant(Contrat ce, String nomE, String prenomE) {
+    public Contrat addAndAffectContratToEtudiant(ContratDTO c, String nomE, String prenomE) {
+          Contrat ce = new Contrat();
+        ce.setDateDebutContrat(c.getDateDebutContrat());
+        ce.setDateFinContrat(c.getDateFinContrat());
+        ce.setSpecialite(c.getSpecialite());
         Long startDate = new Date().getTime();
         log.info("startDate: " + startDate);
         log.info("debut methode addAndAffectContratToEtudiant");
         Etudiant etudiant = etudiantRepository.findByNomEAndPrenomE(nomE, prenomE);
         log.info("etudiant: " + etudiant.getNomE() + " " + etudiant.getPrenomE());
-        // nb contrats actifs
+
         Integer nbContratsActifs = etudiant.getContrats().size();
         if (nbContratsActifs > 5) {
             log.info("nombre de contrats autorisés est atteint");
@@ -128,19 +129,16 @@ public Contrat updateContrat(ContratDTO c) {
             Date dateSysteme = new Date();
 
             if (contrat.getArchived() == null || contrat.getArchived() == false) {
-                long difference_In_Time = contrat.getDateFinContrat().getTime() - dateSysteme.getTime();
-                long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
-                // il est préférable d'utiliser des méthodes prédéfinis de comparaison
-                log.info("difference in days : " + difference_In_Days);
-                // if (difference_In_Days>=0 && difference_In_Days<=15){ // entre 0 et 15 jours
-                // exactement
-                if (difference_In_Days == 15) { // pour 15 jours exactement
+                long differenceInTime = contrat.getDateFinContrat().getTime() - dateSysteme.getTime();
+                long differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
+                log.info("difference in days : " + differenceInDays);
+                if (differenceInDays == 15) { // pour 15 jours exactement
                     log.info(" Contrat Commencant le : " + contrat.getDateDebutContrat() + "pour l'etudiant "
                             + contrat.getEtudiant().getNomE() +
                             " " + contrat.getEtudiant().getPrenomE() + "  va bientot s achever le "
                             + contrat.getDateFinContrat());
                 }
-                if (difference_In_Days == 0) {
+                if (differenceInDays == 0) {
                     log.info("jour j: " + contrat.getIdContrat());
                     contrat.setArchived(true);
                     contratRepository.save(contrat);
@@ -152,9 +150,9 @@ public Contrat updateContrat(ContratDTO c) {
     }
 
     public float getChiffreAffaireEntreDeuxDates(Date startDate, Date endDate) {
-        float difference_In_Time = (float) (endDate.getTime() - startDate.getTime());
-        float difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
-        float difference_In_months = difference_In_Days / 30;
+        float differenceInTime = (float) (endDate.getTime() - startDate.getTime());
+        float differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
+        float difference_In_months = differenceInDays / 30;
         List<Contrat> contrats = contratRepository.findAll();
         float chiffreAffaireEntreDeuxDates = 0;
         float chiffreAffaireEntreDeuxDatesIA = 0;

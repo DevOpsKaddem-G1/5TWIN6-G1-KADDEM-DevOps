@@ -13,7 +13,7 @@ public interface IContratService {
     void removeContrat(Integer idContrat);
     Contrat addContrat(ContratDTO c);
 
-    Contrat addAndAffectContratToEtudiant (Contrat ce, String nomE ,String prenomE );
+    Contrat addAndAffectContratToEtudiant (ContratDTO ce, String nomE ,String prenomE );
 
     public 	Integer nbContratsValides(Date startDate, Date endDate);
 
