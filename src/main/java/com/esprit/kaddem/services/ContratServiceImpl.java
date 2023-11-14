@@ -128,7 +128,7 @@ public class ContratServiceImpl implements IContratService {
 
             Date dateSysteme = new Date();
 
-            if (contrat.getArchived() == null || contrat.getArchived() == false) {
+            if (contrat.getArchived() == null || !contrat.getArchived()) {
                 long differenceInTime = contrat.getDateFinContrat().getTime() - dateSysteme.getTime();
                 long differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
                 log.info("difference in days : " + differenceInDays);
