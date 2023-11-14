@@ -1,21 +1,14 @@
 package com.esprit.kaddem.entities;
 
-
-import com.esprit.kaddem.entities.Contrat;
-import com.esprit.kaddem.entities.Departement;
-import com.esprit.kaddem.entities.Equipe;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-public class Etudiant  implements Serializable {
+public class Etudiant implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -24,10 +17,7 @@ public class Etudiant  implements Serializable {
     private String prenomE;
     private String nomE;
     @Enumerated(EnumType.STRING)
-    private  Option op;
-
-
-
+    private Option op;
 
     @Override
     public String toString() {
@@ -36,23 +26,36 @@ public class Etudiant  implements Serializable {
                 ", prenomE='" + prenomE + '\'' +
                 ", nomE='" + nomE + '\'' +
                 ", op=" + op +
-                ", departement=" + departement +
-                ", equipes=" + equipes +
-                ", contrats=" + contrats +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Etudiant other = (Etudiant) obj;
+        return Objects.equals(idEtudiant, other.idEtudiant) &&
+                Objects.equals(prenomE, other.prenomE) &&
+                Objects.equals(nomE, other.nomE) &&
+                op == other.op;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idEtudiant, prenomE, nomE, op);
     }
 
     public Etudiant() {
     }
 
-    public Etudiant(Integer idEtudiant, String prenomE, String nomE, Option op, Departement departement, List<Equipe> equipes, List<Contrat> contrats) {
-        this.idEtudiant = idEtudiant;
+    public Etudiant(String prenomE, String nomE, Option op) {
         this.prenomE = prenomE;
         this.nomE = nomE;
         this.op = op;
-        this.departement = departement;
-        this.equipes = equipes;
-        this.contrats = contrats;
     }
 
     public Integer getIdEtudiant() {
@@ -87,8 +90,6 @@ public class Etudiant  implements Serializable {
         this.op = op;
     }
 
-
-
     public Departement getDepartement() {
         return departement;
     }
@@ -113,17 +114,14 @@ public class Etudiant  implements Serializable {
         this.contrats = contrats;
     }
 
-
-            @ManyToOne
-            @JsonIgnore
-            private Departement departement;
-            @ManyToMany
-            @JsonIgnore
-            private List<Equipe> equipes;
-            @OneToMany(mappedBy = "etudiant")
-            @JsonIgnore
-            private List<Contrat> contrats;
-
-
+    @ManyToOne
+    @JsonIgnore
+    private Departement departement;
+    @ManyToMany
+    @JsonIgnore
+    private List<Equipe> equipes;
+    @OneToMany(mappedBy = "etudiant")
+    @JsonIgnore
+    private List<Contrat> contrats;
 
 }
