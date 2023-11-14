@@ -58,14 +58,12 @@ public class UniversiteRestController {
         return universite;
     }
 
-    // http://localhost:8089/Kaddem/universite/update-universite
-    @PutMapping("/update-universite")
-    @ResponseBody
-    public Universite updateUniversite(@RequestBody UniversiteDTO universiteDTO) {
-        Universite universite = new Universite();
-        universite.setNomUniv(universiteDTO.getNomUniv());
-
-        return universiteService.updateUniversite(universite);
+    @PutMapping("/{id}")
+    public ResponseEntity<Universite> updateUniversite(@PathVariable Long id, @RequestBody UniversiteDTO universiteDTO) {
+        // Logique de mise à jour de l'université avec l'identifiant id
+        Universite universite = convertDTOToUniversite(universiteDTO);
+        Universite updatedUniversite = universiteService.updateUniversite(id, universite);
+        return ResponseEntity.ok(updatedUniversite);
     }
 
     @DeleteMapping("/delete-universite/{universite-id}")

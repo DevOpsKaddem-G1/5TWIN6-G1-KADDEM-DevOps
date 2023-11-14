@@ -101,26 +101,27 @@ import static org.mockito.Mockito.*;
         assertNotNull(responseEntity.getBody());
     }
 
-//
-//    @Test
-//    void testUpdateUniversite() {
-//        // Mock data
-//        UniversiteDTO universiteDTO = new UniversiteDTO();
-//        universiteDTO.setNomUniv("Universite1");
-//
-//        // Mocking behavior
-//        when(universiteService.updateUniversite(any(Universite.class))).thenReturn(new Universite());
-//
-//        // Perform the test
-//        ResponseEntity<Universite> responseEntity = universiteController.updateUniversite(universiteDTO);
-//
-//        // Verify the interactions
-//        verify(universiteService, times(1)).updateUniversite(any(Universite.class));
-//
-//        // Assertions
-//        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-//        assertNotNull(responseEntity.getBody());
-//    }
+
+    @Test
+    void testUpdateUniversite() {
+        // Mock data
+        UniversiteDTO universiteDTO = new UniversiteDTO();
+        universiteDTO.setNomUniv("Universite1");
+
+        // Mocking behavior
+        when(universiteService.updateUniversite(any(Long.class), any(Universite.class))).thenReturn(new Universite());
+
+        // Perform the test
+        ResponseEntity<Universite> responseEntity = universiteController.updateUniversite(1L, universiteDTO);
+
+        // Verify the interactions
+        verify(universiteService, times(1)).updateUniversite(any(Long.class), any(Universite.class));
+
+        // Assertions
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertNotNull(responseEntity.getBody());
+    }
+
 
     @Test
     void testDeleteUniversite() {

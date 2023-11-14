@@ -26,9 +26,13 @@ public class UniversiteServiceImpl implements IUniversiteService {
         return universiteRepository.save(u);
     }
 
-    public Universite updateUniversite(Universite u) {
-        return universiteRepository.save(u);
+    @Override
+    public Universite updateUniversite(Long id, Universite universite) {
+        // Logique de mise à jour de l'université avec l'identifiant id
+        // Assurez-vous de renvoyer l'objet Universite mis à jour
+        return universiteRepository.save(universite);
     }
+
 
     public Universite retrieveUniversite(Integer idUniversite) {
         Optional<Universite> optionalUniversite = universiteRepository.findById(idUniversite);

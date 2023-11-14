@@ -9,7 +9,8 @@ public interface IUniversiteService {
 
     Universite addUniversite (Universite  u);
 
-    Universite updateUniversite (Universite  u);
+
+    Universite updateUniversite(Long id, Universite universite);
 
     Universite retrieveUniversite (Integer idUniversite);
 
