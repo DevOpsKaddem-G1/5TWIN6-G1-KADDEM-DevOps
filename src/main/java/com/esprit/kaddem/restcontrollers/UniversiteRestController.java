@@ -32,6 +32,13 @@ public class UniversiteRestController {
         return universiteService.retrieveAllUniversites();
     }
 
+    // http://localhost:8089/Kaddem/universite/retrieve-all-universites
+    @PostMapping("/add")
+    @ResponseBody
+    public void add() {
+        universiteService.add();
+    }
+
     // http://localhost:8089/Kaddem/universite/retrieve-universite/8
     @GetMapping("/retrieve-universite/{universite-id}")
     @ResponseBody
@@ -54,6 +61,7 @@ public class UniversiteRestController {
 
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
+
 
     // http://localhost:8089/Kaddem/universite/update-universite
     @PutMapping("/update-universite")

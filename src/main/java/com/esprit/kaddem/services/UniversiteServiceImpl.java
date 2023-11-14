@@ -23,6 +23,10 @@ public class UniversiteServiceImpl implements IUniversiteService {
     }
 
     public Universite addUniversite(Universite u) {
+        return universiteRepository.save(u);
+    }
+
+    public void add() {
         universiteRepository.save(new Universite(1, "Université de Technologie Innovante"));
         universiteRepository.save(new Universite(3, "Ibn Khaldûn (1332-1406)"));
         universiteRepository.save(new Universite(4, "Université Internationale des Sciences"));
@@ -33,7 +37,6 @@ public class UniversiteServiceImpl implements IUniversiteService {
         universiteRepository.save(new Universite(8, "Université Cosmique des Étoiles"));
         universiteRepository.save(new Universite(9, "Université Polytechnique du Futur"));
         universiteRepository.save(new Universite(10, "Université Écologique Verte"));
-        return universiteRepository.save(u);
     }
 
     public Universite updateUniversite(Universite u) {
