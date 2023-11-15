@@ -1,43 +1,55 @@
-# Docker Compose file
 version: '3.1'
 services:
   db:
-    image: mysql:5.7
+    image: mysql
     container_name: database
     restart: unless-stopped
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: kaddemApp
     networks:
-      - mynetwork
+      mynetwork:
+        ipv4_address: 172.18.0.2  # Specify the desired fixed IP address
 
-  backend:
-    image: amalmelki/kaddem-backend:latest
-    container_name: backend
-    restart: on-failure
-    ports:
-      - "7070:8089"
+  back:
     depends_on:
       - db
+    image: amalmelki/kaddem-frontend:latest
+    container_name: back
+    restart: on-failure
+    ports:
+      - "6868:8089"
+    stdin_open: true
+    tty: true
+#    environment:
+#      SPRING_PROFILES_ACTIVE: prod,actuator
+#      MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED: "true"
+#      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: prometheus
     networks:
-      - mynetwork
+      mynetwork:
+        ipv4_address: 172.18.0.3  # Specify a different fixed IP address
 
-  frontend:
+  front:
     image: amalmelki/kaddem-frontend:latest
     ports:
       - "80:80"
     depends_on:
-      - backend
+      - back
     networks:
-      - mynetwork
+      mynetwork:
+        ipv4_address: 172.18.0.4  # Specify a different fixed IP address
 
 volumes:
   mysql_data:
-
 networks:
   mynetwork:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16
