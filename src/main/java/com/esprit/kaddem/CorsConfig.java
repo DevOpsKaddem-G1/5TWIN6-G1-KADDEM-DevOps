@@ -9,7 +9,6 @@ import org.springframework.web.filter.CorsFilter;
 //NOSONAR
 @Configuration
 public class CorsConfig {
-
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
