@@ -21,7 +21,6 @@ public class Universite implements Serializable {
     private Integer idUniversite;
     private String nomUniv;
 
-
     public Universite(Integer idUniversite, String nomUniv) {
         this.idUniversite = idUniversite;
         this.nomUniv = nomUniv;
