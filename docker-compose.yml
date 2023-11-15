@@ -1,42 +1,41 @@
-version: '3.1'
+version: "3.7"
 services:
-  db:
-    image: mysql:5.7
-    container_name: database
-    restart: unless-stopped
-    ports:
-      - "3307:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: kaddemdb
-    networks:
-      - mynetwork
-
   backend:
-    image: amalmelki/kaddem-frontend:latest
     container_name: backend
-    restart: on-failure
+    build: ../5TWIN6-G1-KADDEM-DevOps
     ports:
-      - "7070:8089"
+      - "8089:8089"
+    environment:
+      - SPRING_DATASOURCE_URL=spring.datasource.url=jdbc:mysql://db:3306/khaddemApp?useUnicode=true&createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    restart: unless-stopped
+
+    image: amalmelki/kaddem-backend:latest
     depends_on:
-      - db
-    networks:
-      - mynetwork
+      - khaddemApp
 
   frontend:
-    image: amalmelki/kaddem-frontend:latest
+    container_name: frontend
+    build: ../5TWIN6-G1-KADDEM-DevOps_FrontEndAngular
     ports:
       - "80:80"
+    restart: unless-stopped
+
+    image: amalmelki/kaddem-frontend:latest
     depends_on:
       - backend
-    networks:
-      - mynetwork
+
+  khaddemApp:
+    image: "mysql:5.6"
+    container_name: khaddemApp
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3307:3306"
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
 
 volumes:
-  mysql_data:
-
-networks:
-  mynetwork:
-    driver: bridge
+  db:
