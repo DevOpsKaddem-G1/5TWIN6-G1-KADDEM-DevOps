@@ -1,32 +1,35 @@
 version: "3.7"
 services:
   backend:
+    networks:
+      - your_network_name
     container_name: backend
     build: ../5TWIN6-G1-KADDEM-DevOps
     ports:
       - "8089:8089"
     environment:
-      - SPRING_DATASOURCE_URL=spring.datasource.url=jdbc:mysql://db:3306/khaddemApp?useUnicode=true&createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://khaddemApp:3307/khaddemApp?useUnicode=true&createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=
     restart: unless-stopped
-
-    image: amalmelki/kaddem-backend:latest
     depends_on:
       - khaddemApp
 
   frontend:
+    networks:
+      - your_network_name
     container_name: frontend
     build: ../5TWIN6-G1-KADDEM-DevOps_FrontEndAngular
     ports:
       - "80:80"
     restart: unless-stopped
-
     image: amalmelki/kaddem-frontend:latest
     depends_on:
       - backend
 
   khaddemApp:
+    networks:
+      - your_network_name
     image: "mysql:5.6"
     container_name: khaddemApp
     environment:
@@ -36,6 +39,10 @@ services:
     restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
+
+networks:
+  your_network_name:
+    driver: bridge
 
 volumes:
   db:
