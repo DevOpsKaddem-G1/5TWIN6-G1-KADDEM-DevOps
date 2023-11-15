@@ -1,51 +1,48 @@
 version: '3.1'
+
 services:
-  db:
-    image: mysql
+  database:
+    image: mysql:5.7
     container_name: database
     restart: unless-stopped
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: kaddemdb
+      MYSQL_DATABASE: khaddemdb
     networks:
-      mynetwork:
-        ipv4_address: 172.18.0.2  # Specify the desired fixed IP address
+      - mynetwork
 
-  back:
-    depends_on:
-      - db
+  backend:
     image: amalmelki/kaddem-backend:latest
-    container_name: back
+    container_name: backend
     restart: on-failure
     ports:
-      - "6868:8089"
-    stdin_open: true
-    tty: true
+      - "8089:8089"
+    depends_on:
+      - database
     environment:
       SPRING_PROFILES_ACTIVE: prod,actuator
       MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED: "true"
       MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: prometheus
     networks:
-      mynetwork:
-        ipv4_address: 172.18.0.3  # Specify a different fixed IP address
+      - mynetwork
 
-  front:
+  frontend:
     image: amalmelki/kaddem-frontend:latest
+    container_name: frontend
     ports:
       - "80:80"
     depends_on:
-      - back
+      - backend
     networks:
-      mynetwork:
-        ipv4_address: 172.18.0.4  # Specify a different fixed IP address
+      - mynetwork
 
 volumes:
   mysql_data:
+
 networks:
   mynetwork:
     driver: bridge
