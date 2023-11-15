@@ -1,0 +1,6 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - Aziz-Ben-Ismail-Universite
