@@ -1,4 +1,5 @@
 version: "3.7"
+
 services:
   backend:
     container_name: backend
@@ -12,7 +13,6 @@ services:
     restart: unless-stopped
     depends_on:
       - khaddemdb
-
     image: amalmelki/kaddem-backend:latest
 
   frontend:
@@ -23,7 +23,6 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
-
     image: amalmelki/kaddem-frontend:latest
 
   khaddemdb:
@@ -31,6 +30,7 @@ services:
     container_name: khaddemdb
     environment:
       - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=khaddemApp
     ports:
       - "3307:3306"
     restart: unless-stopped
