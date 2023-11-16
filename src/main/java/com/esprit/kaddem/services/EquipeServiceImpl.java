@@ -28,19 +28,19 @@ public class EquipeServiceImpl implements IEquipeService{
     @Transactional
     public Equipe addEquipe(Equipe e) {
 
-        equipeRepository.save(e);
-        return e;
+       return equipeRepository.save(e);
+
     }
 
     @Override
     public Equipe updateEquipe(Equipe e) {
-        equipeRepository.save(e);
-        return e;
+         return equipeRepository.save(e);
+
     }
 
     @Override
     public Equipe retrieveEquipe(Integer idEquipe) {
-        return   equipeRepository.findById(idEquipe).get();
+        return  equipeRepository.findById(idEquipe).get();
     }
 
 

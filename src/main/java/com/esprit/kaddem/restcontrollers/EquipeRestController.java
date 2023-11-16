@@ -3,7 +3,6 @@ package com.esprit.kaddem.restcontrollers;
 import com.esprit.kaddem.entities.Equipe;
 import com.esprit.kaddem.services.IEquipeService;
 import lombok.AllArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,15 +10,15 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/equipe")
-@CrossOrigin("*")
+@CrossOrigin("80")
 public class EquipeRestController {
     IEquipeService equipeService;
 
     @GetMapping("/retrieve-all-equipes")
     @ResponseBody
     public List<Equipe> getEquipes() {
-        List<Equipe> listEquipes = equipeService.retrieveAllEquipes();
-        return listEquipes;
+       return  equipeService.retrieveAllEquipes();
+
     }
 
 
@@ -34,16 +33,16 @@ public class EquipeRestController {
     @PostMapping("/add-equipe")
     @ResponseBody
     public Equipe addEquipe(@RequestBody Equipe e) {
-        Equipe equipe = equipeService.addEquipe(e);
-        return equipe;
+       return equipeService.addEquipe(e);
+
     }
 
 
     @PutMapping("/update-equipe")
     @ResponseBody
     public Equipe updateEtudiant(@RequestBody Equipe e) {
-        Equipe equipe= equipeService.updateEquipe(e);
-        return equipe;
+        return equipeService.updateEquipe(e);
+
     }
 
 
