@@ -7,8 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -40,8 +42,16 @@ public class EquipeServiceImpl implements IEquipeService{
 
     @Override
     public Equipe retrieveEquipe(Integer idEquipe) {
-        return  equipeRepository.findById(idEquipe).get();
+        Optional<Equipe> equipeOptional = equipeRepository.findById(idEquipe);
+
+        if (equipeOptional.isPresent()) {
+            return equipeOptional.get();
+        } else {
+            // Handle the case when Equipe is not found, for example, throw an exception
+            throw new EntityNotFoundException("Equipe not found for id: " + idEquipe);
+        }
     }
+
 
 
 }
