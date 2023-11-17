@@ -33,16 +33,7 @@ class EquipeRepositoryTest {
         assertTrue(retrievedEquipe.isPresent());
         assertEquals(equipe.getNomEquipe(), retrievedEquipe.get().getNomEquipe());
     }
-    @Test
-    void testFindAll() {
-        // ... existing code ...
 
-        // Retrieve all entities from the repository
-        Iterable<Equipe> allEquipes = equipeRepository.findAll();
-
-        // Assert that the number of retrieved entities matches the number saved
-        long count = StreamSupport.stream(allEquipes.spliterator(), false).count();
-    }
 
 
     @Test
