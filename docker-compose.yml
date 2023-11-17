@@ -15,7 +15,7 @@ services:
       - mynetwork
 
   backend:
-    image: amalmelki/kaddem-backend:1.0.0
+    image: amalmelki/kaddem-back:1.0.0
     container_name: backend
     restart: on-failure
     ports:
