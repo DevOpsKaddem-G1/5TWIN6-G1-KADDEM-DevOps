@@ -1,6 +1,6 @@
 
 FROM openjdk:11
-EXPOSE 8044
+EXPOSE 8089
 
 # Create a directory for the application
 WORKDIR /app
