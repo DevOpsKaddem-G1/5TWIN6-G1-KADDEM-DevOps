@@ -110,6 +110,24 @@ class EtudiantRepositoryTest {
     }
 
     @Test
+    void testGetEtudiantById() {
+        // Create a new student
+        Etudiant etudiantToBePersisted = new Etudiant("John", "Doe", Option.SE);
+        Etudiant savedEtudiant = etudiantRepository.save(etudiantToBePersisted);
+
+        // Retrieve the etudiant by ID from the repository
+        Etudiant retrievedEtudiant = etudiantRepository.findById(savedEtudiant.getIdEtudiant())
+                .orElseThrow(NoSuchElementException::new);
+
+        // Verify that the retrieved etudiant matches the saved etudiant
+        Assertions.assertThat(retrievedEtudiant).isNotNull();
+        Assertions.assertThat(retrievedEtudiant.getIdEtudiant()).isEqualTo(savedEtudiant.getIdEtudiant());
+        Assertions.assertThat(retrievedEtudiant.getPrenomE()).isEqualTo(savedEtudiant.getPrenomE());
+        Assertions.assertThat(retrievedEtudiant.getNomE()).isEqualTo(savedEtudiant.getNomE());
+        Assertions.assertThat(retrievedEtudiant.getOp()).isEqualTo(savedEtudiant.getOp());
+    }
+
+    @Test
     void testDeleteEtudiant() {
         // Arrange
         Etudiant etudiantToBePersisted = new Etudiant("Amen", "Jouini", Option.TWIN);
