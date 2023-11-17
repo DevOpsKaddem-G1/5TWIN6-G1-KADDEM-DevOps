@@ -12,7 +12,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: achatdb
     networks:
-      - mynetwork
+      mynetwork:
+        ipv4_address: 172.18.0.2
 
   backend:
     image: amalmelki/kaddem-back:1.0.0
@@ -23,7 +24,8 @@ services:
     depends_on:
       - db
     networks:
-      - mynetwork
+      mynetwork:
+        ipv4_address: 172.18.0.3
 
   frontend:
     image: amalmelki/kaddem-frontend:1.0.0
@@ -32,11 +34,15 @@ services:
     depends_on:
       - backend
     networks:
-      - mynetwork
+      mynetwork:
+        ipv4_address: 172.18.0.4
 
 volumes:
   mysql_data:
-
 networks:
   mynetwork:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16
