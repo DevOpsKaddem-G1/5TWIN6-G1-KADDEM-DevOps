@@ -16,8 +16,7 @@ public interface IEquipeService {
     Equipe updateEquipe (Equipe  e);
 
     Equipe retrieveEquipe (Integer idEquipe);
-     EquipeDTO convertToDTO(Equipe equipe);
-    Equipe convertToEntity(EquipeDTO equipeDTO);
+
 
 
 }
