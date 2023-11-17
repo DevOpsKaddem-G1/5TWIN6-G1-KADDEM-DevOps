@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class EquipeServiceImplTest {
@@ -66,4 +66,34 @@ class EquipeServiceImplTest {
         Equipe result = equipeService.retrieveEquipe(equipeId);
         assertEquals(fakeEquipe, result);
     }
+    @Test
+    void testRetrieveEquipeNotFound() {
+        int nonExistentEquipeId = 99;
+        when(equipeRepository.findById(nonExistentEquipeId)).thenReturn(Optional.empty());
+
+        Equipe result = equipeService.retrieveEquipe(nonExistentEquipeId);
+        assertNull(result);
+    }
+
+
+
+    @Test
+    void testDeleteEquipe() {
+        int equipeIdToDelete = 1;
+        when(equipeRepository.existsById(equipeIdToDelete)).thenReturn(true);
+
+        Equipe result = equipeService.retrieveEquipe(equipeIdToDelete);
+        assertNotNull(result);
+        assertEquals(equipeIdToDelete, result.getIdEquipe());
+    }
+
+    @Test
+    void testDeleteEquipeNotFound() {
+        int nonExistentEquipeId = 99;
+        when(equipeRepository.existsById(nonExistentEquipeId)).thenReturn(false);
+
+        Equipe result = equipeService.retrieveEquipe(nonExistentEquipeId);
+        assertNull(result);
+    }
+
 }
