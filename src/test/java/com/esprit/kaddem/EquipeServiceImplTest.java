@@ -80,8 +80,8 @@ class EquipeServiceImplTest {
 
 
     @Test
-    void testDeleteEquipe() {
-        int equipeIdToDelete = 1;
+    void testDeleteEquipe(int equipeIdToDelete) {
+
         when(equipeRepository.existsById(equipeIdToDelete)).thenReturn(true);
 
         Equipe result = equipeService.retrieveEquipe(equipeIdToDelete);
