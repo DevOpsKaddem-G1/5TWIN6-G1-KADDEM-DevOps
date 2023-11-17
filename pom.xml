@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.esprit</groupId>
-	<artifactId>5Twin6-G1-Kaddem</artifactId>
+	<artifactId>Kaddem</artifactId>
 	<version>9</version>
 	<name>Kaddem</name>
 	<description>Kaddem</description>
