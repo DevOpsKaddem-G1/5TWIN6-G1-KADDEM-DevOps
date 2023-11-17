@@ -15,11 +15,11 @@ services:
       - mynetwork
 
   backend:
-    image: amalmelki/kaddem-backend:latest
+    image: amalmelki/kaddem-backend:1.0.0
     container_name: backend
     restart: on-failure
     ports:
-      - "8089:8089"
+      - "6969:8089"
     depends_on:
       - db
     networks:
