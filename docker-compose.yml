@@ -25,7 +25,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
 
   front-app:
-    image: amenox1810/devops_project_front
+    image: amenox1810/devops_project_front:frontApp
     container_name: angular-front-project
     ports:
       - "4200:80"
