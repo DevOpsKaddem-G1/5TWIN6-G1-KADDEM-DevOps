@@ -3,6 +3,7 @@ package com.esprit.kaddem.services;
 
 
 import com.esprit.kaddem.entities.Equipe;
+import com.esprit.kaddem.restcontrollers.dtos.EquipeDTO;
 
 import java.util.List;
 
@@ -15,7 +16,8 @@ public interface IEquipeService {
     Equipe updateEquipe (Equipe  e);
 
     Equipe retrieveEquipe (Integer idEquipe);
-
+     EquipeDTO convertToDTO(Equipe equipe);
+    Equipe convertToEntity(EquipeDTO equipeDTO);
 
 
 }
