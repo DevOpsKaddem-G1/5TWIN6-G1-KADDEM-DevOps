@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,14 +37,31 @@ class EquipeRepositoryTest {
     }
     @Test
     void testFindAll() {
-        // ... existing code ...
+        // Save multiple Equipe entities
+        Equipe equipe1 = new Equipe();
+        equipe1.setNomEquipe("Equipe 1");
+        equipeRepository.save(equipe1);
+
+        Equipe equipe2 = new Equipe();
+        equipe2.setNomEquipe("Equipe 2");
+        equipeRepository.save(equipe2);
 
         // Retrieve all entities from the repository
         Iterable<Equipe> allEquipes = equipeRepository.findAll();
 
+        // Convert the Iterable to a List for easier assertions
+        List<Equipe> equipeList = StreamSupport.stream(allEquipes.spliterator(), false)
+                .collect(Collectors.toList());
+
         // Assert that the number of retrieved entities matches the number saved
-        long count = StreamSupport.stream(allEquipes.spliterator(), false).count();
+        assertEquals(2, equipeList.size());
+
+        // Add more assertions based on your application requirements
+        // For example, you can check if the names of the retrieved equipes match the expected names
+        assertEquals("Equipe 1", equipeList.get(0).getNomEquipe());
+        assertEquals("Equipe 2", equipeList.get(1).getNomEquipe());
     }
+
 
 
     @Test
