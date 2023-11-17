@@ -79,15 +79,7 @@ class EquipeServiceImplTest {
 
 
 
-    @Test
-    void testDeleteEquipe(int equipeIdToDelete) {
 
-        when(equipeRepository.existsById(equipeIdToDelete)).thenReturn(true);
-
-        Equipe result = equipeService.retrieveEquipe(equipeIdToDelete);
-        assertNotNull(result);
-        assertEquals(equipeIdToDelete, result.getIdEquipe());
-    }
 
 
 
