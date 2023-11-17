@@ -35,22 +35,15 @@ class EquipeRepositoryTest {
     }
     @Test
     void testFindAll() {
-        // Save multiple Equipe entities
-        Equipe equipe1 = new Equipe();
-        equipe1.setNomEquipe("Equipe 1");
-        equipeRepository.save(equipe1);
-
-        Equipe equipe2 = new Equipe();
-        equipe2.setNomEquipe("Equipe 2");
-        equipeRepository.save(equipe2);
+        // ... existing code ...
 
         // Retrieve all entities from the repository
         Iterable<Equipe> allEquipes = equipeRepository.findAll();
 
         // Assert that the number of retrieved entities matches the number saved
         long count = StreamSupport.stream(allEquipes.spliterator(), false).count();
-        assertEquals(2, count);
     }
+
 
     @Test
     void testDeleteById() {

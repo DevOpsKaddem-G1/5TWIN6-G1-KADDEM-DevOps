@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -71,9 +72,10 @@ class EquipeServiceImplTest {
         int nonExistentEquipeId = 99;
         when(equipeRepository.findById(nonExistentEquipeId)).thenReturn(Optional.empty());
 
-        Equipe result = equipeService.retrieveEquipe(nonExistentEquipeId);
-        assertNull(result);
+        // Assert that the service method throws EntityNotFoundException
+        assertThrows(EntityNotFoundException.class, () -> equipeService.retrieveEquipe(nonExistentEquipeId));
     }
+
 
 
 
@@ -87,13 +89,6 @@ class EquipeServiceImplTest {
         assertEquals(equipeIdToDelete, result.getIdEquipe());
     }
 
-    @Test
-    void testDeleteEquipeNotFound() {
-        int nonExistentEquipeId = 99;
-        when(equipeRepository.existsById(nonExistentEquipeId)).thenReturn(false);
 
-        Equipe result = equipeService.retrieveEquipe(nonExistentEquipeId);
-        assertNull(result);
-    }
 
 }
