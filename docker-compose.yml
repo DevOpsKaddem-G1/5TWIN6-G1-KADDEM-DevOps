@@ -1,19 +1,19 @@
 version: '3.1'
 services:
   db:
-    image: mysql:5.7
+    image: mysql
     container_name: database
     restart: unless-stopped
     ports:
-      - "7072:3306"
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: achatdb
     networks:
-      mynetwork:
-        ipv4_address: 172.18.0.2
+      - mynetwork
+
 
   backend:
     image: amalmelki/kaddem-back:1.0.0
@@ -24,8 +24,7 @@ services:
     depends_on:
       - db
     networks:
-      mynetwork:
-        ipv4_address: 172.18.0.3
+      - mynetwork
 
   frontend:
     image: amalmelki/kaddem-frontend:1.0.0
@@ -34,15 +33,10 @@ services:
     depends_on:
       - backend
     networks:
-      mynetwork:
-        ipv4_address: 172.18.0.4
+      - mynetwork
 
 volumes:
   mysql_data:
 networks:
   mynetwork:
     driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.18.0.0/16
