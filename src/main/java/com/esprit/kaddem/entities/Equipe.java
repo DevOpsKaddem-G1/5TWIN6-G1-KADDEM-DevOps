@@ -1,6 +1,8 @@
 package com.esprit.kaddem.entities;
 
+
 import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -24,5 +26,8 @@ public class Equipe  implements Serializable {
    //@JsonIgnore
     private List<Etudiant> etudiants;
 
-
+    public Equipe(int id, String name) {
+        this.idEquipe = id;
+        this.nomEquipe = name;
+    }
 }
