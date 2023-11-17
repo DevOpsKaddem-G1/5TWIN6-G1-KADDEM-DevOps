@@ -2,7 +2,7 @@ version: "3"
 services:
   DevOps_Project:
     container_name: Kaddem
-    image: amenox1810/amenjouini
+    image: amenox1810/kaddem
     restart: always
     build: .
     ports:
