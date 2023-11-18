@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/equipe")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://192.168.33.10")
 public class EquipeRestController {
     IEquipeService equipeService;
 
