@@ -5,6 +5,7 @@ import com.esprit.kaddem.restcontrollers.dtos.EtudiantDTO;
 import java.util.List;
 
 public interface IEtudiantService {
+    
     List<Etudiant> retrieveAllEtudiants();
     Etudiant addEtudiant(EtudiantDTO e);
     Etudiant updateEtudiant(EtudiantDTO e);
