@@ -69,5 +69,4 @@ public class EtudiantServiceImpl implements IEtudiantService{
         etudiant.setOp(etudiantDTO.getOp());
         return etudiant;
     }
-
 }
