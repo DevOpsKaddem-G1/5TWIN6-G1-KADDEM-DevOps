@@ -13,7 +13,7 @@ public class CorsConfig {
         CorsConfiguration corsConfig = new CorsConfiguration();
 
         // Allow all origins (you might want to restrict this in production)
-        corsConfig.addAllowedOrigin("http://localhost:4200/");
+        corsConfig.addAllowedOrigin("*");
 
         // Allow specific HTTP methods
         corsConfig.addAllowedMethod("GET");
