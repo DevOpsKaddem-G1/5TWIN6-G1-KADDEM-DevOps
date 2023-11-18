@@ -16,7 +16,7 @@ services:
 
 
   backend:
-    image: amalmelki/back-kaddem-devops:1.0
+    image: amalmelki/back-kaddem-devops:latest
     container_name: backend
     restart: on-failure
     ports:
