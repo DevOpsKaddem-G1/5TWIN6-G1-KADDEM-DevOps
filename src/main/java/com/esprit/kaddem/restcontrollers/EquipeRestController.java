@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/equipe")
+@CrossOrigin("*")
 public class EquipeRestController {
     IEquipeService equipeService;
 
