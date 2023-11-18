@@ -27,7 +27,7 @@ services:
       - mynetwork
 
   frontend:
-    image: amalmelki/kaddem-frontend:1.0.0
+    image: amalmelki/kaddem-front-devops:1.0
     ports:
       - "80:80"
     depends_on:
