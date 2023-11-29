@@ -22,15 +22,31 @@ public class ContratDTO {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Date getDateDebutContrat() {
         return dateDebutContrat;
+    }
+
+    public void setDateDebutContrat(Date dateDebutContrat) {
+        this.dateDebutContrat = dateDebutContrat;
     }
 
     public Date getDateFinContrat() {
         return dateFinContrat;
     }
 
+    public void setDateFinContrat(Date dateFinContrat) {
+        this.dateFinContrat = dateFinContrat;
+    }
+
     public Specialite getSpecialite() {
         return specialite;
+    }
+
+    public void setSpecialite(Specialite specialite) {
+        this.specialite = specialite;
     }
 }

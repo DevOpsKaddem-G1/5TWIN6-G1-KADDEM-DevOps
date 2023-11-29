@@ -77,37 +77,49 @@ public class ContratServiceImpl implements IContratService {
 
     @Transactional
     public Contrat addAndAffectContratToEtudiant(ContratDTO c, String nomE, String prenomE) {
-        Contrat ce = new Contrat();
-        ce.setDateDebutContrat(c.getDateDebutContrat());
-        ce.setDateFinContrat(c.getDateFinContrat());
-        ce.setSpecialite(c.getSpecialite());
         Long startDate = new Date().getTime();
         log.info("startDate: " + startDate);
         log.info("debut methode addAndAffectContratToEtudiant");
+    
         Etudiant etudiant = etudiantRepository.findByNomEAndPrenomE(nomE, prenomE);
+        
+        if (etudiant == null) {
+            log.error("Etudiant not found with name: " + nomE + " and surname: " + prenomE);
+            return null;
+        }
+    
         log.info("etudiant: " + etudiant.getNomE() + " " + etudiant.getPrenomE());
-
-        Integer nbContratsActifs = etudiant.getContrats().size();
+    
+        Integer nbContratsActifs = etudiant.getContrats() != null ? etudiant.getContrats().size() : 0;
+        
         if (nbContratsActifs > 5) {
             log.info("nombre de contrats autorisés est atteint");
             Long endDate = new Date().getTime();
             Long executionTime = endDate - startDate;
-            log.info("endDate: " + startDate);
+            log.info("endDate: " + endDate);
             log.info("executionTime: " + executionTime + " ms");
-            return ce;
+            return null; // Or throw an exception or handle accordingly
         }
+    
         log.info("nb Contrats en cours: " + nbContratsActifs);
+    
+        Contrat ce = new Contrat();
+        ce.setDateDebutContrat(c.getDateDebutContrat());
+        ce.setDateFinContrat(c.getDateFinContrat());
+        ce.setSpecialite(c.getSpecialite());
+    
         contratRepository.save(ce);
         ce.setEtudiant(etudiant);
+    
         log.info("fin methode addAndAffectContratToEtudiant");
         Long endDate = new Date().getTime();
         Long executionTime = endDate - startDate;
-
-        log.info("endDate: " + startDate);
+        log.info("endDate: " + endDate);
         log.info("executionTime: " + executionTime + " ms");
-
+    
         return ce;
     }
+    
 
     public Integer nbContratsValides(Date startDate, Date endDate) {
         return contratRepository.getnbContratsValides(startDate, endDate);
@@ -117,34 +129,39 @@ public class ContratServiceImpl implements IContratService {
         log.info("debut methode retrieveAndUpdateStatusContrat");
         List<Contrat> contrats = contratRepository.findAll();
         log.info("total contrats :" + contrats.size());
-
+    
         for (Contrat contrat : contrats) {
             log.info("id: " + contrat.getIdContrat());
             log.info("date fin" + contrat.getDateFinContrat());
             log.info("archived " + contrat.getArchived());
-
+    
             Date dateSysteme = new Date();
-
+    
             if (contrat.getArchived() == null || !contrat.getArchived()) {
-                long differenceInTime = contrat.getDateFinContrat().getTime() - dateSysteme.getTime();
-                long differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
-                log.info("difference in days : " + differenceInDays);
-                if (differenceInDays == 15) { // pour 15 jours exactement
-                    log.info(" Contrat Commencant le : " + contrat.getDateDebutContrat() + "pour l'etudiant "
-                            + contrat.getEtudiant().getNomE() +
-                            " " + contrat.getEtudiant().getPrenomE() + "  va bientot s achever le "
-                            + contrat.getDateFinContrat());
-                }
-                if (differenceInDays == 0) {
-                    log.info("jour j: " + contrat.getIdContrat());
-                    contrat.setArchived(true);
-                    contratRepository.save(contrat);
+                if (contrat.getDateFinContrat() != null) {
+                    long differenceInTime = contrat.getDateFinContrat().getTime() - dateSysteme.getTime();
+                    long differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
+                    log.info("difference in days : " + differenceInDays);
+    
+                    if (differenceInDays == 15) {
+                        log.info(" Contrat Commencant le : " + contrat.getDateDebutContrat() + "pour l'etudiant "
+                                + (contrat.getEtudiant() != null ? contrat.getEtudiant().getNomE() : "") +
+                                " " + (contrat.getEtudiant() != null ? contrat.getEtudiant().getPrenomE() : "") +
+                                "  va bientot s'achever le " + contrat.getDateFinContrat());
+                    }
+                    
+                    if (differenceInDays == 0) {
+                        log.info("jour j: " + contrat.getIdContrat());
+                        contrat.setArchived(true);
+                        contratRepository.save(contrat);
+                    }
                 }
             }
-
+    
             log.info("debut methode retrieveAndUpdateStatusContrat");
         }
     }
+    
 
     public float getChiffreAffaireEntreDeuxDates(Date startDate, Date endDate) {
         float differenceInTime = (float) (endDate.getTime() - startDate.getTime());

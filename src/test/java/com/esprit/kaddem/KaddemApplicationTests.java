@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 class KaddemApplicationTests {
 
+	
 	@Test
 	void contextLoads() {
 		// Ajoutez une assertion pour vérifier que le contexte se charge correctement
