@@ -3,7 +3,7 @@ version: "3.7"
 services:
   backend:
     container_name: Kaddem
-    build: 
+    build:
       context: ../5TWIN6-G1-KADDEM-DevOps
     ports:
       - "8085:8085"
@@ -15,7 +15,7 @@ services:
     image: azizbenhmida/kaddem:2.0.0
 
   angular-app:
-    image: azizbenhmida/front:1.0.0
+    image: azizbenhmida/front:2.0.0
     ports:
       - "4200:80"
     restart: always
