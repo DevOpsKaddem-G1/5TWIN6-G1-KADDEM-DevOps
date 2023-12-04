@@ -21,7 +21,7 @@ import com.esprit.kaddem.repositories.ContratRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 @ExtendWith(SpringExtension.class)
-public class ContratRepositoryTest {
+ class ContratRepositoryTest {
         @BeforeEach
     void initiateDefaultContrats() {
         Contrat defaultContrat1 = new Contrat();
@@ -48,7 +48,7 @@ public class ContratRepositoryTest {
     private ContratRepository contratRepository;
 
     @Test
-    public void testGetnbContratsValides() {
+     void testGetnbContratsValides() {
         // Arrange
         Date startDate = new Date();
         Date endDate = new Date();

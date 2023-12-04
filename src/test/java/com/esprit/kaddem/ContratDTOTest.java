@@ -8,10 +8,10 @@ import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ContratDTOTest {
+ class ContratDTOTest {
 
     @Test
-    public void testContratDTO() {
+     void testContratDTO() {
         // Arrange
         Integer id = 1;
         Date startDate = new Date();
@@ -33,7 +33,7 @@ public class ContratDTOTest {
     }
 
     @Test
-    public void testEmptyConstructor() {
+     void testEmptyConstructor() {
         // Arrange
 
         // Act

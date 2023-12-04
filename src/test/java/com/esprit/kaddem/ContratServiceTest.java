@@ -2,6 +2,7 @@ package com.esprit.kaddem;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
 @Slf4j
-public class ContratServiceTest {
+ class ContratServiceTest {
         @Mock
     private ContratRepository contratRepository;
 
@@ -41,7 +42,7 @@ public class ContratServiceTest {
     private ContratServiceImpl contratService;
 
     @Test
-    public void testRetrieveAllContrats() {
+     void testRetrieveAllContrats() {
         // Creating 2 default contracts
         Contrat contrat1 = new Contrat(1, new Date(), new Date(), Specialite.IA, false, 1000);
         Contrat contrat2 = new Contrat(2, new Date(), new Date(), Specialite.CLOUD, true, 1500);
@@ -61,7 +62,7 @@ public class ContratServiceTest {
     
 
     @Test
-    public void testUpdateContrat() {
+     void testUpdateContrat() {
         // Arrange
         ContratDTO contratDTO = new ContratDTO();
         contratDTO.setId(1);
@@ -85,7 +86,7 @@ public class ContratServiceTest {
     }
 
     @Test
-    public void testAddContrat() {
+     void testAddContrat() {
         // Arrange
         ContratDTO contratDTO = new ContratDTO();
         contratDTO.setDateDebutContrat(new Date());
@@ -103,7 +104,7 @@ public class ContratServiceTest {
     }
 
     @Test
-    public void testRetrieveContrat() {
+     void testRetrieveContrat() {
         // Arrange
         int contratId = 1;
         Contrat expectedContrat = new Contrat();
@@ -118,7 +119,7 @@ public class ContratServiceTest {
     }
 
     @Test
-    public void testRemoveContrat() {
+     void testRemoveContrat() {
         // Arrange
         int contratId = 1;
 
@@ -131,7 +132,7 @@ public class ContratServiceTest {
 
 
     @Test
-    public void testNbContratsValides() {
+     void testNbContratsValides() {
         // Arrange
         Date startDate = new Date();
         Date endDate = new Date();
@@ -146,19 +147,26 @@ public class ContratServiceTest {
         assertEquals(Integer.valueOf(5), result);
     }
 
+
     @Test
-    public void testRetrieveAndUpdateStatusContrat() {
+     void testRetrieveAndUpdateStatusContrat() {
         // Arrange
-        List<Contrat> contrats = Arrays.asList(new Contrat(), new Contrat());
+        Contrat contrat1 = new Contrat();
+        contrat1.setIdContrat(1);
+        contrat1.setDateFinContrat(new Date());
+
+        Contrat contrat2 = new Contrat();
+        contrat2.setIdContrat(2);
+        contrat2.setDateFinContrat(new Date());
+
+        List<Contrat> contrats = Arrays.asList(contrat1, contrat2);
         when(contratRepository.findAll()).thenReturn(contrats);
 
         // Act
         contratService.retrieveAndUpdateStatusContrat();
 
         // Assert (use appropriate assertions based on your logic)
+        verify(contratRepository, times(2)).save(any(Contrat.class));
     }
-
-
-
     
 }

@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class ContratServiceImplTest {
+ class ContratServiceImplTest {
 
     @Mock
     private ContratRepository contratRepository;
@@ -29,7 +29,7 @@ public class ContratServiceImplTest {
     private ContratServiceImpl contratService;
 
     @Test
-    public void testRetrieveAllContrats() {
+     void testRetrieveAllContrats() {
         // Arrange
         List<Contrat> expectedContrats = Arrays.asList(new Contrat(), new Contrat());
         when(contratRepository.findAll()).thenReturn(expectedContrats);
@@ -42,7 +42,7 @@ public class ContratServiceImplTest {
     }
 
     @Test
-    public void testUpdateContrat() {
+     void testUpdateContrat() {
         // Arrange
         ContratDTO contratDTO = new ContratDTO();
         contratDTO.setId(1);
@@ -66,7 +66,7 @@ public class ContratServiceImplTest {
     }
 
     @Test
-    public void testRetrieveContrat() {
+     void testRetrieveContrat() {
         // Arrange
         int contratId = 1;
         Contrat expectedContrat = new Contrat();
@@ -81,7 +81,7 @@ public class ContratServiceImplTest {
     }
 
     @Test
-    public void testRemoveContrat() {
+     void testRemoveContrat() {
         // Arrange
         int contratId = 1;
 
@@ -93,7 +93,7 @@ public class ContratServiceImplTest {
     }
 
     @Test
-    public void testAddContrat() {
+     void testAddContrat() {
         // Arrange
         ContratDTO contratDTO = new ContratDTO();
         contratDTO.setDateDebutContrat(new Date());
@@ -115,6 +115,41 @@ public class ContratServiceImplTest {
         assertThat(addedContrat.getDateDebutContrat()).isEqualTo(actualContrat.getDateDebutContrat());
         assertThat(addedContrat.getDateFinContrat()).isEqualTo(actualContrat.getDateFinContrat());
         assertThat(addedContrat.getSpecialite()).isEqualTo(actualContrat.getSpecialite());
+    }
+    @Test
+     void testNbContratsValides() {
+        // Arrange
+        Date startDate = new Date();
+        Date endDate = new Date();
+        when(contratRepository.getnbContratsValides(startDate, endDate)).thenReturn(5);
+
+        // Act
+        Integer result = contratService.nbContratsValides(startDate, endDate);
+
+        // Assert
+        assert result != null;
+        assert result.equals(5);
+    }
+
+    @Test
+     void testRetrieveAndUpdateStatusContrat() {
+        // Arrange
+        Contrat contrat1 = new Contrat();
+        contrat1.setIdContrat(1);
+        contrat1.setDateFinContrat(new Date());
+
+        Contrat contrat2 = new Contrat();
+        contrat2.setIdContrat(2);
+        contrat2.setDateFinContrat(new Date());
+
+        List<Contrat> contrats = Arrays.asList(contrat1, contrat2);
+        when(contratRepository.findAll()).thenReturn(contrats);
+
+        // Act
+        contratService.retrieveAndUpdateStatusContrat();
+
+        // Assert (use appropriate assertions based on your logic)
+        verify(contratRepository, times(2)).save(any(Contrat.class));
     }
 
 }

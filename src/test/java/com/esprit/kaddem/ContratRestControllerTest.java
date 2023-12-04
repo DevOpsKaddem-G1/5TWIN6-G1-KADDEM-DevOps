@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ContratRestControllerTest {
+ class ContratRestControllerTest {
 
     @Mock
     private IContratService contratService;
@@ -29,7 +29,7 @@ public class ContratRestControllerTest {
     private ContratRestController contratRestController;
 
     @Test
-    public void testGetContrats() {
+     void testGetContrats() {
         // Arrange
         List<Contrat> expectedContrats = Arrays.asList(new Contrat(), new Contrat());
         when(contratService.retrieveAllContrats()).thenReturn(expectedContrats);
@@ -42,7 +42,7 @@ public class ContratRestControllerTest {
     }
 
     @Test
-    public void testRetrieveContrat() {
+     void testRetrieveContrat() {
         // Arrange
         int contratId = 1;
         Contrat expectedContrat = new Contrat();
@@ -56,7 +56,7 @@ public class ContratRestControllerTest {
     }
 
     @Test
-    public void testAddContrat() {
+     void testAddContrat() {
         // Arrange
         ContratDTO contratDTO = new ContratDTO();
         contratDTO.setDateDebutContrat(new Date());
@@ -76,7 +76,7 @@ public class ContratRestControllerTest {
     }
 
      @Test
-    public void testUpdateContrat() {
+     void testUpdateContrat() {
         // Arrange
         ContratDTO contratDTO = new ContratDTO();
         contratDTO.setDateDebutContrat(new Date());
@@ -96,7 +96,7 @@ public class ContratRestControllerTest {
     }
 
     @Test
-    public void testGetnbContratsValides() {
+     void testGetnbContratsValides() {
         // Arrange
         Date startDate = new Date();
         Date endDate = new Date();
@@ -112,7 +112,7 @@ public class ContratRestControllerTest {
     }
 
     @Test
-    public void testMajStatusContrat() {
+     void testMajStatusContrat() {
         // Arrange
 
         // Act

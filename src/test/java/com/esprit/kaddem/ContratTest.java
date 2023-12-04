@@ -8,10 +8,10 @@ import com.esprit.kaddem.entities.Specialite;
 import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ContratTest {
+ class ContratTest {
 
     @Test
-    public void testGettersAndSetters() {
+     void testGettersAndSetters() {
         // Arrange
         Date startDate = new Date();
         Date endDate = new Date();
@@ -38,7 +38,7 @@ public class ContratTest {
     }
 
     @Test
-    public void testToString() {
+     void testToString() {
         // Arrange
         Contrat contrat = new Contrat(1, new Date(), new Date(), Specialite.CLOUD, false, 1500);
 
@@ -52,7 +52,7 @@ public class ContratTest {
     }
 
     @Test
-    public void testConstructor() {
+     void testConstructor() {
         // Arrange
         Date startDate = new Date();
         Date endDate = new Date();
