@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/contrat")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://127.0.0.1:4200")
 public class ContratRestController {
     @Autowired
     IContratService contratService;
