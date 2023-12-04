@@ -6,7 +6,7 @@ services:
     build:
       context: ../5TWIN6-G1-KADDEM-DevOps
     ports:
-      - "8085:8085"
+      - "8090:8085"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://dbmysql:3306/kaddemApp?createDatabaseIfNotExist=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
