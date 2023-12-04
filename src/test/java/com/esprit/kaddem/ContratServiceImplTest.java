@@ -117,18 +117,18 @@ import static org.mockito.Mockito.when;
         assertThat(addedContrat.getSpecialite()).isEqualTo(actualContrat.getSpecialite());
     }
     @Test
-     void testNbContratsValides() {
+    void testNbContratsValides() {
         // Arrange
         Date startDate = new Date();
         Date endDate = new Date();
+        
         when(contratRepository.getnbContratsValides(startDate, endDate)).thenReturn(5);
-
+    
         // Act
         Integer result = contratService.nbContratsValides(startDate, endDate);
-
+    
         // Assert
-        assert result != null;
-        assert result.equals(5);
+        assertThat(result).isNotNull().isEqualTo(5);
     }
 
     @Test

@@ -46,9 +46,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         String result = contrat.toString();
 
         // Assert
-        assertThat(result).contains("idContrat=1");
-        assertThat(result).contains("specialite=CLOUD");
-        assertThat(result).contains("montantContrat=1500");
+        assertThat(result).contains("idContrat=1").contains("specialite=CLOUD").contains("montantContrat=1500");
     }
 
     @Test
