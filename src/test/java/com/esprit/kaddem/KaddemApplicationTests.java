@@ -1,17 +1,21 @@
 package com.esprit.kaddem;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.springframework.context.ApplicationContext;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class KaddemApplicationTests {
 
-	
-	@Test
-	void contextLoads() {
-		// Ajoutez une assertion pour vérifier que le contexte se charge correctement
-		assertTrue(true); // Changez ceci en l'assertion appropriée pour votre test
-	}
+    @Autowired
+    private ApplicationContext applicationContext;
 
+    @Test
+    void contextLoads() {
+        // Check if the application context loads successfully
+        assertThat(applicationContext).isNotNull();
+    }
 }
