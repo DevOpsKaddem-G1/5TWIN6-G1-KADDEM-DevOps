@@ -90,7 +90,21 @@ public class Etudiant implements Serializable {
         this.op = op;
     }
 
+    public Departement getDepartement() {
+        return departement;
+    }
 
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
+    }
 
     public List<Contrat> getContrats() {
         return contrats;
@@ -100,7 +114,13 @@ public class Etudiant implements Serializable {
         this.contrats = contrats;
     }
 
-
+    @ManyToOne
+    @JsonIgnore
+    private Departement departement;
+    @ManyToMany
+    @JsonIgnore
+    private List<Equipe> equipes;
+    @OneToMany(mappedBy = "etudiant")
     @JsonIgnore
     private List<Contrat> contrats;
 

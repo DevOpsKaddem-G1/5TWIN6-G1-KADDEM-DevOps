@@ -10,13 +10,21 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
     restart: unless-stopped
-    image: azizbenhmida/kaddem:2.0.0
 
-  angular-app:
-    image: azizbenhmida/kaddemangular:1.0.0  # Spécifiez le nom de votre image et la version (dans cet exemple, "latest")
+    image: azizbenhmida/kaddem:2.0.0
+    depends_on:
+      - dbmysql
+
+  dbmysql:
+    image: "mysql:5.6"
+    container_name: dbmysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
     ports:
-      - "4200:80"  # Assurez-vous que les ports correspondent à ceux que vous utilisez dans votre application
-    restart: always 
+      - "3306:3306"
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
 
 volumes:
-
+  db:
