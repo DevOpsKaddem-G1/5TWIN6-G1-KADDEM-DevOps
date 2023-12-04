@@ -1,22 +1,23 @@
 version: "3.7"
+
 services:
   backend:
     container_name: Kaddem
-    build: ../5TWIN6-G1-KADDEM-DevOps
+    build: 
+      context: ../5TWIN6-G1-KADDEM-DevOps
     ports:
       - "8085:8085"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://dbmysql:3306/kaddemApp?createDatabaseIfNotExist=true&userSSL=false
+      - SPRING_DATASOURCE_URL=jdbc:mysql://dbmysql:3306/kaddemApp?createDatabaseIfNotExist=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
     restart: unless-stopped
-
     image: azizbenhmida/kaddem:2.0.0
 
   angular-app:
-    image: azizbenhmida/kaddemangular:1.0.0  # Spécifiez le nom de votre image et la version (dans cet exemple, "latest")
+    image: azizbenhmida/front:1.0.0
     ports:
-          - "4200:80"
+      - "4200:80"
     restart: always
-volumes:
 
+volumes: 
