@@ -21,10 +21,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.esprit.kaddem.entities.Contrat;
-import com.esprit.kaddem.entities.Etudiant;
 import com.esprit.kaddem.entities.Specialite;
 import com.esprit.kaddem.repositories.ContratRepository;
-import com.esprit.kaddem.repositories.EtudiantRepository;
 import com.esprit.kaddem.restcontrollers.dtos.ContratDTO;
 import com.esprit.kaddem.services.ContratServiceImpl;
 
@@ -38,8 +36,6 @@ public class ContratServiceTest {
         @Mock
     private ContratRepository contratRepository;
 
-    @Mock
-    private EtudiantRepository etudiantRepository;
 
     @InjectMocks
     private ContratServiceImpl contratService;
@@ -47,8 +43,8 @@ public class ContratServiceTest {
     @Test
     public void testRetrieveAllContrats() {
         // Creating 2 default contracts
-        Contrat contrat1 = new Contrat(1, new Date(), new Date(), Specialite.IA, false, 1000, new Etudiant());
-        Contrat contrat2 = new Contrat(2, new Date(), new Date(), Specialite.CLOUD, true, 1500, new Etudiant());
+        Contrat contrat1 = new Contrat(1, new Date(), new Date(), Specialite.IA, false, 1000);
+        Contrat contrat2 = new Contrat(2, new Date(), new Date(), Specialite.CLOUD, true, 1500);
     
         when(contratRepository.findAll()).thenReturn(Arrays.asList(contrat1, contrat2));
         List<Contrat> contratsList = contratService.retrieveAllContrats();
@@ -133,30 +129,6 @@ public class ContratServiceTest {
         verify(contratRepository, times(1)).deleteById(contratId);
     }
 
-    @Test
-    public void testAddAndAffectContratToEtudiant() {
-        // Arrange
-        ContratDTO contratDTO = new ContratDTO();
-        contratDTO.setDateDebutContrat(new Date());
-        contratDTO.setDateFinContrat(new Date());
-        contratDTO.setSpecialite(Specialite.SECURITE);
-
-        String nomE = "John";
-        String prenomE = "Doe";
-
-        Etudiant etudiant = new Etudiant();
-        etudiant.setNomE(nomE);
-        etudiant.setPrenomE(prenomE);
-
-        when(etudiantRepository.findByNomEAndPrenomE(nomE, prenomE)).thenReturn(etudiant);
-
-        // Act
-        Contrat addedContrat = contratService.addAndAffectContratToEtudiant(contratDTO, nomE, prenomE);
-
-        // Assert
-        assertNotNull(addedContrat);
-        assertEquals(etudiant, addedContrat.getEtudiant());
-    }
 
     @Test
     public void testNbContratsValides() {
@@ -186,27 +158,7 @@ public class ContratServiceTest {
         // Assert (use appropriate assertions based on your logic)
     }
 
-    @Test
-    public void testGetChiffreAffaireEntreDeuxDates() {
-        // Arrange
-        Date startDate = new Date();
-        Date endDate = new Date();
 
-        Contrat contrat1 = new Contrat();
-        contrat1.setSpecialite(Specialite.IA);
-        contrat1.setMontantContrat(1000);
-
-        Contrat contrat2 = new Contrat();
-        contrat2.setSpecialite(Specialite.CLOUD);
-        contrat2.setMontantContrat(800);
-
-        when(contratRepository.findAll()).thenReturn(Arrays.asList(contrat1, contrat2));
-
-        // Act
-        float result = contratService.getChiffreAffaireEntreDeuxDates(startDate, endDate);
-
-        // Assert (use appropriate assertions based on your logic)
-    }
 
     
 }

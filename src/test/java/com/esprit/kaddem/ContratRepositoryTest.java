@@ -63,18 +63,5 @@ public class ContratRepositoryTest {
         assertEquals(Integer.valueOf(5), result);
     }
 
-    @Test
-    public void testFindByEtudiantIdEtudiant() {
-        // Arrange
-        Integer idEtudiant = 1;
-        List<Contrat> expectedContrats = Arrays.asList(new Contrat(), new Contrat());
-        when(contratRepository.findByEtudiantIdEtudiant(idEtudiant)).thenReturn(expectedContrats);
-
-        // Act
-        List<Contrat> actualContrats = contratRepository.findByEtudiantIdEtudiant(idEtudiant);
-
-        // Assert
-        assertEquals(expectedContrats, actualContrats);
-    }
 
 }

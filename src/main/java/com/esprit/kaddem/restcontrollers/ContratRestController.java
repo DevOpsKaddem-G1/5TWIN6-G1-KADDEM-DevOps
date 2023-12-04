@@ -45,17 +45,10 @@ public class ContratRestController {
     // http://localhost:8089/Kaddem/contrat/update-contrat
     @PutMapping("/update-contrat")
     @ResponseBody
-    public Contrat updateEtudiant(@RequestBody ContratDTO cont) {
+    public Contrat updateContrat(@RequestBody ContratDTO cont) {
         return contratService.updateContrat(cont);
     }
 
-    // http://localhost:8089/Kaddem/contrat/addAndAffectContratToEtudiant/salah/ahmed
-    @PostMapping("/addAndAffectContratToEtudiant/{nomE}/{prenomE}")
-    @ResponseBody
-    public Contrat addAndAffectContratToEtudiant(@RequestBody ContratDTO contrat, @PathVariable("nomE") String nomE,
-            @PathVariable("prenomE") String prenomE) {
-        return contratService.addAndAffectContratToEtudiant(contrat, nomE, prenomE);
-    }
 
     // The most common ISO Date Format yyyy-MM-dd — for example, "2000-10-31".
     @GetMapping(value = "/getnbContratsValides/{startDate}/{endDate}")
@@ -74,15 +67,5 @@ public class ContratRestController {
         contratService.retrieveAndUpdateStatusContrat();
     }
 
-    // public float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate)
-
-    @GetMapping("/calculChiffreAffaireEntreDeuxDate/{startDate}/{endDate}")
-    @ResponseBody
-    public float calculChiffreAffaireEntreDeuxDates(
-            @PathVariable(name = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-            @PathVariable(name = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
-
-        return contratService.getChiffreAffaireEntreDeuxDates(startDate, endDate);
-    }
 
 }

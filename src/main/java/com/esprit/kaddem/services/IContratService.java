@@ -17,11 +17,8 @@ public interface IContratService {
 
     Contrat addContrat(ContratDTO c);
 
-    Contrat addAndAffectContratToEtudiant(ContratDTO ce, String nomE, String prenomE);
-
     public Integer nbContratsValides(Date startDate, Date endDate);
 
-    public float getChiffreAffaireEntreDeuxDates(Date startDate, Date endDate);
 
     public void retrieveAndUpdateStatusContrat();
 }

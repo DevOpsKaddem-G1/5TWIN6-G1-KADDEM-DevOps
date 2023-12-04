@@ -1,32 +1,28 @@
 package com.esprit.kaddem;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
+import com.esprit.kaddem.entities.Contrat;
+import com.esprit.kaddem.restcontrollers.ContratRestController;
+import com.esprit.kaddem.restcontrollers.dtos.ContratDTO;
+import com.esprit.kaddem.services.IContratService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import com.esprit.kaddem.entities.Contrat;
-import com.esprit.kaddem.entities.Specialite;
-import com.esprit.kaddem.repositories.ContratRepository;
-import com.esprit.kaddem.restcontrollers.ContratRestController;
-import com.esprit.kaddem.restcontrollers.dtos.ContratDTO;
-import com.esprit.kaddem.services.IContratService;
-
-@ExtendWith(SpringExtension.class)
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ContratRestControllerTest {
-        @Mock
+
+    @Mock
     private IContratService contratService;
 
     @InjectMocks
@@ -46,17 +42,29 @@ public class ContratRestControllerTest {
     }
 
     @Test
+    public void testRetrieveContrat() {
+        // Arrange
+        int contratId = 1;
+        Contrat expectedContrat = new Contrat();
+        when(contratService.retrieveContrat(contratId)).thenReturn(expectedContrat);
+
+        // Act
+        Contrat actualContrat = contratRestController.retrieveContrat(contratId);
+
+        // Assert
+        assertEquals(expectedContrat, actualContrat);
+    }
+
+    @Test
     public void testAddContrat() {
         // Arrange
         ContratDTO contratDTO = new ContratDTO();
         contratDTO.setDateDebutContrat(new Date());
         contratDTO.setDateFinContrat(new Date());
-        contratDTO.setSpecialite(Specialite.RESEAU);
 
         Contrat addedContrat = new Contrat();
         addedContrat.setDateDebutContrat(contratDTO.getDateDebutContrat());
         addedContrat.setDateFinContrat(contratDTO.getDateFinContrat());
-        addedContrat.setSpecialite(contratDTO.getSpecialite());
 
         when(contratService.addContrat(contratDTO)).thenReturn(addedContrat);
 
@@ -64,11 +72,54 @@ public class ContratRestControllerTest {
         Contrat actualContrat = contratRestController.addContrat(contratDTO);
 
         // Assert
-        assertNotNull(actualContrat);
-        assertEquals(addedContrat.getDateDebutContrat(), actualContrat.getDateDebutContrat());
-        assertEquals(addedContrat.getDateFinContrat(), actualContrat.getDateFinContrat());
-        assertEquals(addedContrat.getSpecialite(), actualContrat.getSpecialite());
+        assertEquals(addedContrat, actualContrat);
     }
 
+     @Test
+    public void testUpdateContrat() {
+        // Arrange
+        ContratDTO contratDTO = new ContratDTO();
+        contratDTO.setDateDebutContrat(new Date());
+        contratDTO.setDateFinContrat(new Date());
+
+        Contrat updatedContrat = new Contrat();
+        updatedContrat.setDateDebutContrat(contratDTO.getDateDebutContrat());
+        updatedContrat.setDateFinContrat(contratDTO.getDateFinContrat());
+
+        when(contratService.updateContrat(contratDTO)).thenReturn(updatedContrat);
+
+        // Act
+        Contrat actualContrat = contratRestController.updateContrat(contratDTO);
+
+        // Assert
+        assertEquals(updatedContrat, actualContrat);
+    }
+
+    @Test
+    public void testGetnbContratsValides() {
+        // Arrange
+        Date startDate = new Date();
+        Date endDate = new Date();
+        Integer expectedCount = 5;
+
+        when(contratService.nbContratsValides(startDate, endDate)).thenReturn(expectedCount);
+
+        // Act
+        Integer actualCount = contratRestController.getnbContratsValides(startDate, endDate);
+
+        // Assert
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    public void testMajStatusContrat() {
+        // Arrange
+
+        // Act
+        assertDoesNotThrow(() -> contratRestController.majStatusContrat());
+
+        // Assert
+        verify(contratService).retrieveAndUpdateStatusContrat();
+    }
 
 }
