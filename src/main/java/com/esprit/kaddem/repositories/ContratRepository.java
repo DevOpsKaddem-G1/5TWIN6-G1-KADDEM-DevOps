@@ -6,7 +6,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.esprit.kaddem.entities.Contrat;
 import java.util.Date;
-import java.util.List;
 
 @Repository
 public interface ContratRepository extends JpaRepository<Contrat, Integer> {

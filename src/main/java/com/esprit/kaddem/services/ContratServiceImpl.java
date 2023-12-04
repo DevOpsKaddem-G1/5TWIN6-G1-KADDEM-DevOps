@@ -6,11 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.esprit.kaddem.entities.Contrat;
-import com.esprit.kaddem.entities.Specialite;
 import com.esprit.kaddem.repositories.ContratRepository;
 import com.esprit.kaddem.restcontrollers.dtos.ContratDTO;
-
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
