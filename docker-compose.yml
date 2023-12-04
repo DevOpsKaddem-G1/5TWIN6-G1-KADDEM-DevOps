@@ -13,7 +13,10 @@ services:
 
     image: azizbenhmida/kaddem:2.0.0
 
-
-
+  angular-app:
+    image: azizbenhmida/kaddemangular:1.0.0  # Spécifiez le nom de votre image et la version (dans cet exemple, "latest")
+    ports:
+          - "4200:80"
+    restart: always
 volumes:
 
