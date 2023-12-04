@@ -8,7 +8,7 @@ services:
     ports:
       - "8090:8085"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://dbmysql:3306/kaddemApp?createDatabaseIfNotExist=true&useSSL=false
+      - SPRING_DATASOURCE_URL=jdbc:mysql://192.168.159.128:3306/kaddemApp?createDatabaseIfNotExist=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
     restart: unless-stopped
