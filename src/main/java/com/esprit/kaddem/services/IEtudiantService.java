@@ -10,5 +10,4 @@ public interface IEtudiantService {
     Etudiant updateEtudiant(EtudiantDTO e);
     Etudiant retrieveEtudiant(Integer idEtudiant);
     String removeEtudiant(Integer idEtudiant);
-
 }
